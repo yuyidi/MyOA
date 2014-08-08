@@ -1,0 +1,37 @@
+package com.yyd.myoa.plugin;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.yyd.myoa.service.UserinfoRepositoryService;
+
+public class SessionListener implements HttpSessionListener {
+    
+    private UserinfoRepositoryService userinfoRepositoryService;
+
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+        HttpSession session = se.getSession();
+      //10分钟后session被销毁，重新登录
+        session.setMaxInactiveInterval(10*60);
+        System.out.println("session 被创建了");
+    }
+
+
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        HttpSession session = se.getSession();
+        userinfoRepositoryService = getBean(se, "userinfoRepositoryService");
+        System.out.println("session 被销毁："+session.getMaxInactiveInterval()+"秒"+userinfoRepositoryService.getUserinfo("admin", "password").getUserName());
+    }
+    
+    
+    public static <T> T getBean(HttpSessionEvent se,String name){
+        WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(se.getSession().getServletContext());
+        return (T) applicationContext.getBean(name);
+    }
+}

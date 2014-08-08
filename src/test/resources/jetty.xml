@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure id='wac' class="org.eclipse.jetty.webapp.WebAppContext">
+	<!-- 配置一个web应用 -->
+	<Set name="war">src/main/webapp</Set>
+	<Set name="contextPath">/myoa</Set>
+
+	<!-- 创建数据源 -->
+	<New id="mydatasource" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>java:comp/env/jdbc/mydatasource</Arg>
+		<Arg>
+			<New class="com.alibaba.druid.pool.DruidDataSource">
+				<Set name="driverClassName">com.mysql.jdbc.Driver</Set>		<!-- 数据库驱动 -->
+				<Set name="url">jdbc:mysql://127.0.0.1:3306/myoa?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull
+				</Set>		<!-- 连接URL串 -->
+				<Set name="username">root</Set>
+				<Set name="password">123456</Set>
+				<Set name="maxActive">10</Set>
+
+				<!-- 初始化连接大小 -->
+				<Set name="initialSize">0</Set>
+				<!-- 连接池最大使用连接数量 -->
+				<Set name="maxActive">20</Set>
+				<!-- 连接池最小空闲 -->
+				<Set name="minIdle">0</Set>
+				<!-- 获取连接最大等待时间 -->
+				<Set name="maxWait">60000</Set>
+				<Set name="validationQuery">SELECT 1</Set>
+				<Set name="testOnBorrow">false</Set>
+				<Set name="testOnReturn">false</Set>
+				<Set name="testWhileIdle">true</Set>
+
+				<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+				<Set name="timeBetweenEvictionRunsMillis">60000</Set>
+				<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+				<Set name="minEvictableIdleTimeMillis">25200000</Set>
+				<!-- 打开removeAbandoned功能 -->
+				<Set name="removeAbandoned">true</Set>
+				<!-- 1800秒，也就是30分钟 -->
+				<Set name="removeAbandonedTimeout">1800</Set>
+				<!-- 关闭abanded连接时输出错误日志 -->
+				<Set name="logAbandoned">true</Set>
+				<!-- 监控数据库 -->
+				<Set name="filters">stat</Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>
