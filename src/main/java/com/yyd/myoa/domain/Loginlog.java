@@ -1,7 +1,6 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 
 
@@ -9,26 +8,19 @@ import java.util.Date;
  * The persistent class for the loginlog database table.
  * 
  */
-@Entity
 public class Loginlog implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int loginId;
 
 	private int ifSuccess;
 
 	private String loginDesc;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date loginTime;
 
 	private String loginUserIp;
 
-	//bi-directional many-to-one association to Userinfo
-    @ManyToOne
-	@JoinColumn(name="UserId")
 	private Userinfo userinfo;
 
     public Loginlog() {

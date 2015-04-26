@@ -13,7 +13,6 @@ public class SessionListener implements HttpSessionListener {
     
     private UserinfoRepositoryService userinfoRepositoryService;
 
-    @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();
       //10分钟后session被销毁，重新登录
@@ -22,7 +21,6 @@ public class SessionListener implements HttpSessionListener {
     }
 
 
-    @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession session = se.getSession();
         userinfoRepositoryService = getBean(se, "userinfoRepositoryService");
@@ -30,6 +28,7 @@ public class SessionListener implements HttpSessionListener {
     }
     
     
+    @SuppressWarnings("unchecked")
     public static <T> T getBean(HttpSessionEvent se,String name){
         WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(se.getSession().getServletContext());
         return (T) applicationContext.getBean(name);

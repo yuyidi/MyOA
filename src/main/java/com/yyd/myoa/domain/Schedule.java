@@ -1,34 +1,23 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 
-/**
- * The persistent class for the schedule database table.
- * 
- */
-@Entity
 public class Schedule implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int scheduleId;
 
 	private String address;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date beginTime;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date createTime;
 
 	private String createUser;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date endTime;
 
 	private int ifPrivate;
@@ -37,13 +26,8 @@ public class Schedule implements Serializable {
 
 	private String title;
 
-	//bi-directional many-to-one association to Precontract
-	@OneToMany(mappedBy="schedule")
 	private Set<Precontract> precontracts;
 
-	//bi-directional many-to-one association to Meetinginfo
-    @ManyToOne
-	@JoinColumn(name="MeetingId")
 	private Meetinginfo meetinginfo;
 
     public Schedule() {

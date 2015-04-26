@@ -1,31 +1,21 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
 
 /**
  * The persistent class for the messagetouser database table.
  * 
  */
-@Entity
 public class Messagetouser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private int ifRead;
 
-	//bi-directional many-to-one association to Message
-    @ManyToOne
-	@JoinColumn(name="MessageId")
 	private Message message;
 
-	//bi-directional many-to-one association to Userinfo
-    @ManyToOne
-	@JoinColumn(name="ToUserId")
 	private Userinfo userinfo;
 
     public Messagetouser() {

@@ -1,30 +1,18 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import java.util.Set;
 
 
-/**
- * The persistent class for the userstate database table.
- * 
- */
-@Entity
 public class Userstate implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userStateId;
 
 	private String userStateName;
 
-	//bi-directional many-to-one association to Userinfo
-	@OneToMany(mappedBy="userstate")
 	private Set<Userinfo> userinfos;
 
     public Userstate() {

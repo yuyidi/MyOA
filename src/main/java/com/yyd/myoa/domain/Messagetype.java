@@ -1,7 +1,6 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Set;
 
 
@@ -9,20 +8,15 @@ import java.util.Set;
  * The persistent class for the messagetype database table.
  * 
  */
-@Entity
 public class Messagetype implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int messageTypeId;
 
 	private String messageDesc;
 
 	private String messageTypeName;
 
-	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="messagetype")
 	private Set<Message> messages;
 
     public Messagetype() {

@@ -37,11 +37,8 @@ public class ServiceException extends Exception implements UncaughtExceptionHand
     public static ServiceException userInfoError(Exception ex){
         return new ServiceException(USER_INFO_ERROR, 0,ex);
     }
-    
 
 
-
-    @Override
     public void uncaughtException(Thread t, Throwable e) {
         
     }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yyd.myoa.constant.SystemConstant;
+import com.yyd.myoa.exception.ValidateException;
 
 
 /**
@@ -22,7 +23,6 @@ import com.yyd.myoa.constant.SystemConstant;
  */
 public class MVCExceptionHandler implements HandlerExceptionResolver {
 
-    @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
             Object handler, Exception ex) {
         Map<String, Object> model = new HashMap<String, Object>();

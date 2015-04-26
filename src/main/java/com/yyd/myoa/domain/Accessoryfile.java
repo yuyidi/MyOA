@@ -1,7 +1,6 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 
 
@@ -9,12 +8,9 @@ import java.util.Date;
  * The persistent class for the accessoryfile database table.
  * 
  */
-@Entity
 public class Accessoryfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int accessoryId;
 
 	private String accessoryName;
@@ -25,12 +21,8 @@ public class Accessoryfile implements Serializable {
 
 	private int accessoryType;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date createDate;
 
-	//bi-directional many-to-one association to Fileinfo
-    @ManyToOne
-	@JoinColumn(name="FileId")
 	private Fileinfo fileinfo;
 
     public Accessoryfile() {

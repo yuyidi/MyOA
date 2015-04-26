@@ -1,7 +1,6 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Set;
 
 
@@ -9,12 +8,9 @@ import java.util.Set;
  * The persistent class for the userinfo database table.
  * 
  */ 
-@Entity
 public class Userinfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String userId;
 
 	private int departId;
@@ -29,50 +25,26 @@ public class Userinfo implements Serializable {
 	
 	private String userPricter;
 
-	//bi-directional many-to-one association to Departinfo
-	@OneToMany(mappedBy="userinfo",fetch=FetchType.EAGER)
 	private Set<Departinfo> departinfos;
 
-	//bi-directional many-to-one association to Loginlog
-	@OneToMany(mappedBy="userinfo")
 	private Set<Loginlog> loginlogs;
 
-	//bi-directional many-to-one association to Manualsign
-	@OneToMany(mappedBy="userinfo")
 	private Set<Manualsign> manualsigns;
 
-	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="userinfo")
 	private Set<Message> messages;
 
-	//bi-directional many-to-one association to Messagetouser
-	@OneToMany(mappedBy="userinfo")
 	private Set<Messagetouser> messagetousers;
 
-	//bi-directional many-to-one association to Mynote
-	@OneToMany(mappedBy="userinfo")
 	private Set<Mynote> mynotes;
 
-	//bi-directional many-to-one association to Operatelog
-	@OneToMany(mappedBy="userinfo")
 	private Set<Operatelog> operatelogs;
 
-	//bi-directional many-to-one association to Precontract
-	@OneToMany(mappedBy="userinfo")
 	private Set<Precontract> precontracts;
 
-	//bi-directional many-to-one association to Readcommonmessage
-	@OneToMany(mappedBy="userinfo")
 	private Set<Readcommonmessage> readcommonmessages;
 
-	//bi-directional many-to-one association to Roleinfo
-    @ManyToOne
-	@JoinColumn(name="RoleId")
 	private Roleinfo roleinfo;
 
-	//bi-directional many-to-one association to Userstate
-    @ManyToOne
-	@JoinColumn(name="UserState")
 	private Userstate userstate;
 
     public Userinfo() {

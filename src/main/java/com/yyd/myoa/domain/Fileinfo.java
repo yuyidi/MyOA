@@ -1,7 +1,6 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,18 +9,13 @@ import java.util.Set;
  * The persistent class for the fileinfo database table.
  * 
  */
-@Entity
 public class Fileinfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int fileId;
 
-    @Temporal( TemporalType.DATE)
 	private Date createDate;
 
-    @Temporal( TemporalType.DATE)
 	private Date deleteTime;
 
 	private String fileName;
@@ -36,13 +30,8 @@ public class Fileinfo implements Serializable {
 
 	private String remark;
 
-	//bi-directional many-to-one association to Accessoryfile
-	@OneToMany(mappedBy="fileinfo")
 	private Set<Accessoryfile> accessoryfiles;
 
-	//bi-directional many-to-one association to Filetypeinfo
-    @ManyToOne
-	@JoinColumn(name="FileType")
 	private Filetypeinfo filetypeinfo;
 
     public Fileinfo() {

@@ -1,32 +1,20 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Set;
 
 
-/**
- * The persistent class for the roleinfo database table.
- * 
- */
-@Entity
 public class Roleinfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int roleId;
 
 	private String roleDesc;
 
 	private String roleName;
 
-	//bi-directional many-to-one association to Roleright
-	@OneToMany(mappedBy="roleinfo")
 	private Set<Roleright> rolerights;
 
-	//bi-directional many-to-one association to Userinfo
-	@OneToMany(mappedBy="roleinfo")
 	private Set<Userinfo> userinfos;
 
     public Roleinfo() {

@@ -1,7 +1,6 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Set;
 
 
@@ -9,12 +8,9 @@ import java.util.Set;
  * The persistent class for the filetypeinfo database table.
  * 
  */
-@Entity
 public class Filetypeinfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int fileTypeId;
 
 	private String fileTypeImage;
@@ -23,8 +19,6 @@ public class Filetypeinfo implements Serializable {
 
 	private String fileTypeSuffix;
 
-	//bi-directional many-to-one association to Fileinfo
-	@OneToMany(mappedBy="filetypeinfo")
 	private Set<Fileinfo> fileinfos;
 
     public Filetypeinfo() {

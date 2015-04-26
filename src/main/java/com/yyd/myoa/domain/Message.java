@@ -1,54 +1,32 @@
 package com.yyd.myoa.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-
-/**
- * The persistent class for the message database table.
- * 
- */
-@Entity
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int messageId;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date beginTime;
 
 	private String content;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date endTime;
 
 	private int ifPublish;
 
-    @Temporal( TemporalType.TIMESTAMP)
 	private Date recordTime;
 
 	private String title;
 
-	//bi-directional many-to-one association to Messagetype
-    @ManyToOne
-	@JoinColumn(name="Type")
 	private Messagetype messagetype;
 
-	//bi-directional many-to-one association to Userinfo
-    @ManyToOne
-	@JoinColumn(name="FromUserId")
 	private Userinfo userinfo;
 
-	//bi-directional many-to-one association to Messagetouser
-	@OneToMany(mappedBy="message")
 	private Set<Messagetouser> messagetousers;
 
-	//bi-directional many-to-one association to Readcommonmessage
-	@OneToMany(mappedBy="message")
 	private Set<Readcommonmessage> readcommonmessages;
 
     public Message() {
