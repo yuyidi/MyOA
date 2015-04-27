@@ -5,8 +5,12 @@
     	<pattern>/login</pattern>
     </excludes>
 
- <!-- 用来定义装饰器要过滤的页面 -->
-    <decorator name="main" page="/main.ftl">
-        <pattern>/*</pattern>
+    <!-- 用来定义装饰器要过滤的页面 -->
+    <decorator name="main" page="main.ftl">
+    	<pattern>/*</pattern>
+    </decorator>
+    
+    <decorator name="index" page="index.ftl">
+    	<pattern>/*</pattern>
     </decorator>
 </decorators>

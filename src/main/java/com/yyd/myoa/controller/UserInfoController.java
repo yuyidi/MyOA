@@ -42,4 +42,8 @@ public class UserInfoController {
 	    Page<UserInfo> userInfos=  userInfoService.getUserinfoList(query);
 	    model.put("result", userInfos);
 	}
+	@RequestMapping(value="/demo")
+	public String demo(){
+	    return "demo";
+	}
 }
