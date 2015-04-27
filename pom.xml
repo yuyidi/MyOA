@@ -12,7 +12,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<jetty.version>8.0.0.M3</jetty.version>
 		<mysql.version>5.1.25</mysql.version>
-		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<!--单元测试 -->
@@ -320,8 +320,6 @@
 		</dependency>
 		<!-- jetty -->
 	</dependencies>
-
-
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<pluginManagement>
@@ -478,7 +476,11 @@
 		<!-- shiro-freemarker-tags repo -->
 		<!-- <repository> -->
 		<!-- <id>shiro-freemarkertags-google-code-repo</id> -->
-		<!-- <url>https://shiro-freemarkertags.google.code/svn/truk</url> -->
+		<!-- <url>http://shiro-freemarkertags.google.code/svn/truk</url> -->
 		<!-- </repository> -->
+		<repository>
+			<id>osc_thirdparty</id>
+			<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+		</repository>
 	</repositories>
 </project>

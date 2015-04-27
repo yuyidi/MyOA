@@ -7,11 +7,12 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.yyd.myoa.domain.Userinfo;
+import com.yyd.myoa.model.UserInfo;
+
 
 public class UserinfoServiceTest extends BaseServiceTest{
     @Autowired
-	private UserinfoRepositoryService repositoryService;
+	private UserInfoService userInfoService;
 	
 	@Test
 	public void getPassword(){
@@ -23,7 +24,7 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	
 	@Test
 	public void getUser(){
-	    List<Userinfo> userinfo = repositoryService.getUserinfoList();
+	    List<UserInfo> userinfo = userInfoService.getUserinfoList();
 	    createJSONResult(userinfo);
 	}
 }

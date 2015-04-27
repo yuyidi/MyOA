@@ -7,19 +7,21 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yyd.myoa.domain.Userinfo;
-import com.yyd.myoa.utils.MyUtils;
+import com.yyd.myoa.dao.UserInfoMapper;
+import com.yyd.myoa.model.UserInfo;
 
 
-@Service("userinfoRepositoryService")
-public class UserinfoRepositoryService {
+@Service
+public class UserInfoService {
+	@Autowired
+	private UserInfoMapper userInfoMapper;
 	
-	public Userinfo getUserinfo(String userId,String password) throws UnknownAccountException,IncorrectCredentialsException{
+	public UserInfo getUserinfo(String userId,String password) throws UnknownAccountException,IncorrectCredentialsException{
 		return null;
 	}
 	
-	public List<Userinfo> getUserinfoList(){
-	    return null;
+	public List<UserInfo> getUserinfoList(){
+	    return userInfoMapper.select();
 	}
 	
 }

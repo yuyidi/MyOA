@@ -13,7 +13,7 @@
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml,classpath:springDatasource.xml,classpath:springShiro.xml</param-value>
+		<param-value>classpath:applicationContext.xml,classpath:springDatasource.xml,classpath:springShiro.xml;classpath:springMybatis.xml</param-value>
 	</context-param>
 
 

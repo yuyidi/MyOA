@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSessionListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.yyd.myoa.service.UserinfoRepositoryService;
+import com.yyd.myoa.service.UserInfoService;
 
 public class SessionListener implements HttpSessionListener {
     
-    private UserinfoRepositoryService userinfoRepositoryService;
+    private UserInfoService userinfoRepositoryService;
 
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();

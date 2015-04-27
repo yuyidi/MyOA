@@ -45,11 +45,6 @@
 	</bean>
 	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="interceptors"> 
-				<list>
-					<ref bean="openEntityManagerInViewInterceptor" />
-				</list>
-		</property>
 	</bean>
 
 	<!-- springMVC 静态资源处理 -->
