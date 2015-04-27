@@ -1,18 +1,19 @@
 package com.yyd.myoa.service;
 
-import java.util.List;
-
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.yyd.myoa.dao.UserInfoMapper;
 import com.yyd.myoa.model.UserInfo;
+import com.yyd.myoa.query.UserInfoQuery;
 
 
 @Service
-public class UserInfoService {
+public class UserInfoService extends BaseService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 	
@@ -20,8 +21,9 @@ public class UserInfoService {
 		return null;
 	}
 	
-	public List<UserInfo> getUserinfoList(){
-	    return userInfoMapper.select();
+	public Page<UserInfo> getUserinfoList(UserInfoQuery query){
+		PageList<UserInfo> pageList =(PageList<UserInfo>)userInfoMapper.selectByQuery(query, createPageBounds(query));
+		Page<UserInfo> page = new Page<UserInfo>(pageList);
+	    return page;
 	}
-	
 }

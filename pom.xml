@@ -172,7 +172,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 		<!-- servlet 结束 -->
 		<!-- Apache 开始 -->
 		<dependency>
@@ -221,19 +220,24 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.2.8</version>
 		</dependency>
+		<!-- mybatis 通用mapper 单表操作比较方便，放弃 -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.github.abel533</groupId> -->
+		<!-- <artifactId>mapper</artifactId> -->
+		<!-- 2.3.2是版本号，推荐使用最新版 -->
+		<!-- <version>2.3.2</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.github.miemiedev</groupId>
+			<artifactId>mybatis-paginator</artifactId>
+			<version>1.2.16</version>
+		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
 		<!-- mybatis 结束 -->
-		<!-- 常用解析XMLdom4j -->
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-		<!-- 常用解析XMLdom4j -->
 		<!-- fastjson 开始 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>

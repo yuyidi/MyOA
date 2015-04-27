@@ -11,7 +11,7 @@ import com.yyd.myoa.service.UserInfoService;
 
 public class SessionListener implements HttpSessionListener {
     
-    private UserInfoService userinfoRepositoryService;
+    private UserInfoService userInfoService;
 
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();
@@ -23,8 +23,8 @@ public class SessionListener implements HttpSessionListener {
 
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession session = se.getSession();
-        userinfoRepositoryService = getBean(se, "userinfoRepositoryService");
-        System.out.println("session 被销毁："+session.getMaxInactiveInterval()+"秒"+userinfoRepositoryService.getUserinfo("admin", "password").getUserName());
+        userInfoService = getBean(se, "userInfoService");
+//        System.out.println("session 被销毁："+session.getMaxInactiveInterval()+"秒"+userInfoService.getUserinfo("admin", "password").getUserName());
     }
     
     

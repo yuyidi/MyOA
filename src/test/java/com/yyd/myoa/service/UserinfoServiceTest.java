@@ -1,13 +1,12 @@
 package com.yyd.myoa.service;
 
 
-import java.util.List;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yyd.myoa.model.UserInfo;
+import com.yyd.myoa.query.UserInfoQuery;
 
 
 public class UserinfoServiceTest extends BaseServiceTest{
@@ -24,7 +23,8 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	
 	@Test
 	public void getUser(){
-	    List<UserInfo> userinfo = userInfoService.getUserinfoList();
+		UserInfoQuery query = new UserInfoQuery();
+	    Page<UserInfo> userinfo = userInfoService.getUserinfoList(query);
 	    createJSONResult(userinfo);
 	}
 }

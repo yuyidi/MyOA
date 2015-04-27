@@ -41,7 +41,7 @@
 						/500=anon
 						/user/login*=anon
 						<!-- 所有的请求 (除去配置的静态资源请求或请求地址为anon的请求都要通过登录验证,如果未登录则跳到/login）  -->
-						/**=authc
+						/**=anon
 					</value>
 				</property>
 		</bean>

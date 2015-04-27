@@ -3,18 +3,11 @@
 PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 <configuration>
-	<settings>
-		<setting name="cacheEnabled" value="true" />
-	</settings>
-<!-- 	<plugins> -->
-<!-- 		<plugin interceptor="cn.org.rapid_framework.mybatis.plugin.PaginationInterceptor"> -->
-<!-- 			<property name="dialectClass" -->
-<!-- 				value="cn.org.rapid_framework.jdbc.dialect.MySQLDialect" /> -->
-<!-- 		</plugin> -->
-		<!-- 指定数据库分页方言Dialect, 其它方言:OracleDialect,SQLServerDialect,SybaseDialect,DB2Dialect,PostgreSQLDialect,MySQLDialect,DerbyDialect,HSQLDialect -->
-<!-- 		<plugin interceptor="cn.org.rapid_framework.mybatis.plugin.OffsetLimitInterceptor"> -->
-<!-- 			<property name="dialectClass" -->
-<!-- 				value="cn.org.rapid_framework.jdbc.dialect.MySQLDialect" /> -->
-<!-- 		</plugin> -->
-<!-- 	</plugins> -->
+	<plugins>
+		<plugin
+			interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+			<property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect" />
+			<property name="asyncTotalCount" value="true" />
+		</plugin>
+	</plugins>
 </configuration>

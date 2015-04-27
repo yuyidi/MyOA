@@ -11,3 +11,4 @@ target/
 .svn
 bin
 *.orig
+.externalToolBuilders
