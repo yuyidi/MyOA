@@ -138,7 +138,6 @@
 			</div>
 			<!-- END STYLE CUSTOMIZER -->
 			<!--content 内容页-->
-			<!--<#include "content.ftl">-->
 			${body}
 			<!--quik_sidebar 右边菜单-->
 			<#include "quick_sidebar.ftl">

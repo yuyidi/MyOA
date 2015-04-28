@@ -100,11 +100,7 @@
 				Demo.init(); // init demo features 
 				Index.init();
 				Index.initDashboardDaterange();
-				Index.initJQVMAP(); // init index page's custom scripts
-				Index.initCalendar(); // init index page's custom scripts
-				Index.initCharts(); // init index page's custom scripts
-				Index.initChat();
-				Index.initMiniCharts();
+				${head}
 				Tasks.initDashboardWidget();
 			});
 		</script>

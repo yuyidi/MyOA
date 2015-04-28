@@ -799,6 +799,11 @@
 
 							Vector Maps</a>
 					</li>
+					<li>
+						<a href="${rc.contextPath}/user-info/demo">
+
+							demo</a>
+					</li>
 				</ul>
 			</li>
 		</ul>
