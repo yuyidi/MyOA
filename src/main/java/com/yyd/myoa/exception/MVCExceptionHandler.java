@@ -30,7 +30,6 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
         // 此处可以根据不用的异常返回不同的视图
         String message = "未知错误";
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        System.out.println("---"+ex.getMessage());
         try {
           //验证错误异常(参数异常)
             if(ex instanceof ValidateException){
@@ -67,8 +66,7 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
 //            }
         }
         finally {
-            model.put("message", message);
-            mv.addObject("result", model);
+            mv.addObject("result", message);
         }
         return  mv;
     }

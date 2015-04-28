@@ -20,10 +20,10 @@ var Login = function() {
 
             messages: {
                 username: {
-                    required: "Username is required."
+                    required: "用户名必填."
                 },
                 password: {
-                    required: "Password is required."
+                    required: "密码必填."
                 }
             },
 
@@ -44,9 +44,8 @@ var Login = function() {
             errorPlacement: function(error, element) {
                 error.insertAfter(element.closest('.input-icon'));
             },
-
             submitHandler: function(form) {
-                form.submit(); // form validation success, call ajax form submit
+            	 form.submit();// form validation success, call ajax form submit
             }
         });
 

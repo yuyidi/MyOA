@@ -2,6 +2,8 @@ package com.yyd.myoa.controller;
 
 import java.sql.SQLException;
 
+import net.sf.ehcache.transaction.xa.processor.XARequest.RequestType;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yyd.myoa.exception.ServiceException;
@@ -25,15 +28,6 @@ public class UserInfoController {
     
 	@Autowired
 	private UserInfoService userInfoService;
-	
-	@RequestMapping(value="/login")
-	public void login(@RequestParam("userId")String userId,@RequestParam("password") String password,ModelMap model) throws Exception{
-		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken();
-		token.setUsername(userId);
-		token.setPassword(password.toCharArray());
-		subject.login(token);
-	}
 	
 	@RequestMapping(value="/table")
 	public void user(ModelMap model,@RequestParam(value="page",required=false) int page){
