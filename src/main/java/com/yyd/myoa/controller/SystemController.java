@@ -22,9 +22,8 @@ public class SystemController {
         return new ModelAndView("404");
     }
     
-    @RequestMapping(value="/index")
+    @RequestMapping(value="/")
     public ModelAndView index(){
         return new ModelAndView("index");
     }
-    
 }

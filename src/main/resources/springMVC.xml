@@ -19,7 +19,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 	<!-- 配置首页请求道index页面 -->
-	<mvc:view-controller path="/index" view-name="content" />
+	<mvc:view-controller path="/" view-name="index" />
 	<!-- 简单配置 -->
 	<!-- <mvc:annotation-driven /> -->
 

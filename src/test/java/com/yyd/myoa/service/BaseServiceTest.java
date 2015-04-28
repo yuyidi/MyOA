@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations={"classpath:applicationContext.xml","classpath:springDatasource.xml","classpath:springMVC.xml","classpath:springMybatis.xml"})
+@ContextConfiguration(locations={"classpath:applicationContext.xml","classpath:springDatasource.xml","classpath:springMVC.xml","classpath:springMybatis.xml","classpath:springShiro.xml"})
 public class BaseServiceTest {
 	
 	public void createJSONResult(Object object) {

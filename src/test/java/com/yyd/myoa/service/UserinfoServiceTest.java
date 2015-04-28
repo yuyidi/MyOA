@@ -27,4 +27,8 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	    Page<UserInfo> userinfo = userInfoService.getUserinfoList(query);
 	    createJSONResult(userinfo);
 	}
+	@Test
+	public void getUserPassword(){
+		System.out.println(userInfoService.getUserPassword("a"));
+	}
 }

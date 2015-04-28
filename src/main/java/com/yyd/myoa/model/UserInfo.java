@@ -18,8 +18,19 @@ public class UserInfo {
     private Integer ifDeleteUser;
 
     private String userPricter;
+    
+    public UserInfo() {
+	}
+    
+    public UserInfo(String userId, String userName, String password,
+			Integer gender) {
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.gender = gender;
+	}
 
-    public String getUserId() {
+	public String getUserId() {
         return userId;
     }
 

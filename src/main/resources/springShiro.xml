@@ -18,12 +18,13 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 		
+		<bean id="authcFormAuthenticationFilter" class="com.yyd.myoa.interceptor.AuthcFormAuthenticationFilter"/>
 		<!-- shiro filter -->
 		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" >
 				<!-- 调用我们配置的权限管理器  -->
 				<property name="securityManager" ref="securityManager"/>
 				<property name="loginUrl" value="/login"/><!-- 登录请求地址  -->
-				 <property name="successUrl" value="/index"/>	 <!-- 配置我们在登录页登录成功后的跳转地址  -->
+				 <property name="successUrl" value="/"/>	 <!-- 配置我们在登录页登录成功后的跳转地址  -->
 				<property name="unauthorizedUrl" value="/404" />  <!-- 如果您请求的资源不再您的权限范围，则跳转到/404请求地址  -->
 				<!-- 权限配置  -->
 				<property name="filters">
@@ -39,24 +40,37 @@
 						/400=anon
 						/404=anon
 						/500=anon
-						/user/login*=anon
+						/user-info/login*=anon
 						<!-- 所有的请求 (除去配置的静态资源请求或请求地址为anon的请求都要通过登录验证,如果未登录则跳到/login）  -->
-						/**=anon
+						/**=authc
 					</value>
 				</property>
 		</bean>
 		
-		<bean id="authcFormAuthenticationFilter" class="com.yyd.myoa.interceptor.AuthcFormAuthenticationFilter"/>
-		
+		<!-- shiro 权限根对象 -->
 		<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 			<property name="realm" ref="myRealm"/>
 				<!-- 使用下面配置的缓存管理器 -->  
         	<property name="cacheManager" ref="cacheManager"/> 
 		</bean>
 		
-		<!-- shiro 权限鉴定  -->
-		<bean id="myRealm" class="com.yyd.myoa.shiro.MyShiroRealm"/>
-		
 		<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 		<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+		
+		<bean id="hashService" class="org.apache.shiro.crypto.hash.DefaultHashService"/>
+		<bean id="hashFormat" class="org.apache.shiro.crypto.hash.format.Shiro1CryptFormat"/>
+		<bean id="hashFormatFactory" class="org.apache.shiro.crypto.hash.format.DefaultHashFormatFactory"/>
+		<bean id="passwordService" class="org.apache.shiro.authc.credential.DefaultPasswordService">
+				<property name="hashService"  ref="hashService"/>
+				<property name="hashFormat"  ref="hashFormat"/>
+				<property name="hashFormatFactory"  ref="hashFormatFactory"/>
+		</bean>
+		<bean id="passwordMatcher" class="org.apache.shiro.authc.credential.PasswordMatcher">
+			<property name="passwordService" ref="passwordService"/>
+		</bean>
+		
+		<!-- shiro 权限鉴定  -->
+		<bean id="myRealm" class="com.yyd.myoa.shiro.MyShiroRealm">
+			<property name="credentialsMatcher" ref="passwordMatcher"></property>
+		</bean>
 </beans>		

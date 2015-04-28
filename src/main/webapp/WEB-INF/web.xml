@@ -158,7 +158,10 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.svg</url-pattern>
+	</servlet-mapping>
 	<!-- 配置错误页面 -->
 	<!-- <error-page> -->
 	<!-- <error-code>404</error-code> -->
@@ -168,4 +171,7 @@
 	<!-- <error-code>500</error-code> -->
 	<!-- <location>/505</location> -->
 	<!-- </error-page> -->
+	<welcome-file-list>
+		<welcome-file>/</welcome-file>
+	</welcome-file-list>
 </web-app>

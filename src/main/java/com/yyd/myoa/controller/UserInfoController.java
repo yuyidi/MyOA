@@ -1,5 +1,7 @@
 package com.yyd.myoa.controller;
 
+import java.sql.SQLException;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -9,7 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.yyd.myoa.exception.ServiceException;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.query.UserInfoQuery;
 import com.yyd.myoa.service.Page;
@@ -31,7 +33,6 @@ public class UserInfoController {
 		token.setUsername(userId);
 		token.setPassword(password.toCharArray());
 		subject.login(token);
-		model.addAttribute("status", true);
 	}
 	
 	@RequestMapping(value="/table")
@@ -45,5 +46,22 @@ public class UserInfoController {
 	@RequestMapping(value="/demo")
 	public String demo(){
 	    return "demo";
+	}
+	
+	/**
+	 * @throws ServiceException 
+	 * 
+	* @Title: register
+	* @Description: 用户注册
+	* @return void
+	* @throws
+	 */
+	@RequestMapping(value="/register")
+	public void register(UserInfo userInfo,ModelMap modelMap) throws ServiceException{
+		UserInfo user = new UserInfo("yyd", "余乙迪", "yuyidi0630", 1);
+		Integer result = userInfoService.registerUser(user);
+		if(result>0){
+			modelMap.put("result", "添加成功");
+		}
 	}
 }

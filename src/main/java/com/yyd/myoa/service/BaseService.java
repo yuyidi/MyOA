@@ -1,10 +1,13 @@
 package com.yyd.myoa.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.yyd.myoa.query.PageQuery;
 
-public class BaseService {
-	
+public class BaseService<T> {
+	Logger log = LoggerFactory.getLogger(getClass().getName());
 	public PageBounds createPageBounds(PageQuery query){
 		if(query == null){
 			query = new PageQuery();

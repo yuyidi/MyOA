@@ -142,4 +142,7 @@
   <select id="selectByQuery" resultMap="BaseResultMap">
   		select <include refid="Base_Column_List"/> from user_info
   </select>
+  <select id="selectPasswordByUserId" resultType="String" >
+  		select password from user_info where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
 </mapper>

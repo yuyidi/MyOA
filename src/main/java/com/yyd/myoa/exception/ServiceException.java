@@ -7,6 +7,7 @@ public class ServiceException extends Exception implements UncaughtExceptionHand
     private static final long serialVersionUID = 1L;
     
     public static final String USER_INFO_ERROR ="001";
+    public static final String USER_ADD_ERROR="002";
     
     private String type;
     private Integer code;
@@ -36,6 +37,11 @@ public class ServiceException extends Exception implements UncaughtExceptionHand
     //用户信息错误
     public static ServiceException userInfoError(Exception ex){
         return new ServiceException(USER_INFO_ERROR, 0,ex);
+    }
+    
+  //用户信息错误
+    public static ServiceException userAddError(Exception ex){
+        return new ServiceException(USER_ADD_ERROR, 0,ex);
     }
 
 

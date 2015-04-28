@@ -30,6 +30,7 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
         // 此处可以根据不用的异常返回不同的视图
         String message = "未知错误";
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        System.out.println("---"+ex.getMessage());
         try {
           //验证错误异常(参数异常)
             if(ex instanceof ValidateException){
@@ -40,13 +41,13 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
             //业务层异常处理
             if(ex instanceof ServiceException){
                 ServiceException se = (ServiceException) ex;
-                message = se.getMessage();
+                message = se.showMsg();
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                mv.setViewName("400");
+//                mv.setViewName("400");
             }
             //权限，未知账户异常
             if(ex instanceof UnknownAccountException){
-                message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
+                message = ex.getMessage();
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
             //权限，密码错误异常
@@ -66,7 +67,7 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
 //            }
         }
         finally {
-            model.put("msg", message);
+            model.put("message", message);
             mv.addObject("result", model);
         }
         return  mv;
