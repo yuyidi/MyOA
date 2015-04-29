@@ -15,11 +15,9 @@ public class Mail {
 	private Logger log = LoggerFactory.getLogger(Mail.class);
 	private MailSender mailSender;
 	private SimpleMailMessage simpleMailMessage;
-	private MimeMessage mimeMessage=((JavaMailSenderImpl) mailSender).createMimeMessage();
-	private MimeMessageHelper helper=null;
-	
+	MimeMessage mimeMessage=null;
+    MimeMessageHelper helper=null;
 	public void sendMail(String subject,String content,String to) throws MessagingException{
-		helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
 		helper.setFrom(simpleMailMessage.getFrom());
 		helper.setSubject(subject);
 		helper.setTo(to);
@@ -29,6 +27,13 @@ public class Mail {
 	
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
+		mimeMessage=((JavaMailSenderImpl) mailSender).createMimeMessage();
+		 try {
+            helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+        }
+        catch (MessagingException e) {
+            log.error(e.getMessage());
+        }
 	}
 	public void setSimpleMailMessage(SimpleMailMessage simpleMailMessage) {
 		this.simpleMailMessage = simpleMailMessage;

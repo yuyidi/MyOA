@@ -3,6 +3,7 @@ package com.yyd.myoa.utils;
 import java.util.Random;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
 
 import com.yyd.myoa.exception.ValidateException;
 

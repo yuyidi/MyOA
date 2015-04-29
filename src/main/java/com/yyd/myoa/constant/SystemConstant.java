@@ -7,7 +7,7 @@ import com.yyd.myoa.shiro.ShiroUser;
 
 public class SystemConstant {
 	
-	public static final String SUBJECT_TITLE="My_OA，我的办公OA";
+	public static final String SUBJECT_TITLE="MyOA，我的办公OA";
 	
 //	session 中管理员的Key
 	public static final String SYSTEM_ADMIN="SYSTEM_ADMIN";

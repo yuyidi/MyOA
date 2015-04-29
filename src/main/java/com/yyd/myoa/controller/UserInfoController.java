@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +17,7 @@ import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.query.UserInfoQuery;
 import com.yyd.myoa.service.Page;
 import com.yyd.myoa.service.UserInfoService;
+import com.yyd.myoa.utils.HttpUtils;
 
 
 
@@ -50,7 +50,7 @@ public class UserInfoController extends BaseController {
 	 */
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public String register(UserInfo userInfo,ModelMap model,HttpServletRequest request) throws ServiceException{
-		String result = userInfoService.registerUser(userInfo,request.getContextPath());
+		String result = userInfoService.registerUser(userInfo,HttpUtils.getBasePath(request));
 		Map<String, String> map = new HashMap<String, String>();
 		log.debug(result);
 		map.put("message", result);
@@ -67,7 +67,7 @@ public class UserInfoController extends BaseController {
 	* @throws
 	 */
 	@RequestMapping(value="/verify")
-	public String verify(@RequestParam("userActiCode") String userActiCode,@RequestParam("random") String random) throws ServiceException{
+	public String verify(@RequestParam("random") String random,@RequestParam("userActiCode") String userActiCode) throws ServiceException{
 		userInfoService.verify(random, userActiCode);
 		return "redirect:/login";
 	}

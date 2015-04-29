@@ -1,5 +1,7 @@
 package com.yyd.myoa.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yyd.myoa.model.UserVerify;
 
 public interface UserVerifyMapper {
@@ -15,5 +17,5 @@ public interface UserVerifyMapper {
 
     int updateByPrimaryKey(UserVerify record);
     
-    String selectVerifyByCode(String actiCode,String actiNameCode);
+    String selectVerifyByCode(@Param("actiCode")String actiCode,@Param("actiNameCode")String actiNameCode);
 }

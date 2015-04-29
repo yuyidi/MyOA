@@ -1,14 +1,10 @@
 package com.yyd.myoa.service;
 
-import java.sql.SQLException;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.PasswordService;
-import org.springframework.aop.ThrowsAdvice;
+import org.apache.shiro.codec.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,10 +63,13 @@ public class UserInfoService extends BaseService {
 		userInfo.setPassword(passwordService.encryptPassword(userInfo
 				.getPassword()));
 		String num = String.valueOf(MyUtils.getIntRandom());
-		String random = passwordService.encryptPassword(num);
-		String userActiCode = passwordService.encryptPassword(userInfo.getUserName());
+		String random = passwordService.encryptPassword(num);//使用SHA-512算法将随机数加密
+		String userActiCode = passwordService.encryptPassword(userInfo.getUserName());//使用SHA-512算法将用户真实姓名加密
 		userInfo.setActiCode(random);
 		userInfo.setActiCodeName(userActiCode);
+		//将SHA-512算法加密后的数据使用base64算法加密
+		String encodeUserActiCode = Base64.encodeToString(userActiCode.getBytes());
+		String encodeRandom=Base64.encodeToString(random.getBytes());
 		String result = "邮件未发送成功";
 		try {
 			int res = userInfoMapper.insertSelective(userInfo);
@@ -78,12 +77,9 @@ public class UserInfoService extends BaseService {
 					random,userActiCode);
 			if (res > 0) {
 				userVerifyMapper.insert(uv);
-//				String content="</h4>请点击下面链接完成注册</h4><br/><a href="+contextPath+"/user-info/verify?userActiCode="+userActiCode+"&random="+random+"\">" +
-//						contextPath+"/user-info/verify?userActiCode="+userActiCode+"&random="+random+"</a>";
-				StringBuffer content = new StringBuffer();
-				content.append("</h4>请点击下面链接完成注册</h4><br/>");
-				content.append("<a>");
-				mail.sendMail(SystemConstant.SUBJECT_TITLE, content.toString(), userInfo.getEmail());
+				String content ="<html><head><meta http-equiv="+"Content-Type"+" content="+"text/html; charset=utf-8"+"></head><body><h2>请点击下面链接完成注册</h2><a href="+contextPath+"/user-info/verify?userActiCode="+encodeUserActiCode+"&random="+encodeRandom+">"+  
+				        contextPath+"/user-info/verify?userActiCode="+encodeUserActiCode+"&random="+encodeRandom+"</a><br></body></html>";
+				mail.sendMail(SystemConstant.SUBJECT_TITLE, content, userInfo.getEmail());
 				result ="邮件已发送到你的邮箱，请确认完成注册";
 			}
 		} catch (Exception e) {
@@ -100,7 +96,7 @@ public class UserInfoService extends BaseService {
 	* @throws
 	 */
 	public void verify(String actiCode,String actiNameCode) throws ServiceException{
-		String userId=userVerifyMapper.selectVerifyByCode(actiCode, actiNameCode);
+		String userId=userVerifyMapper.selectVerifyByCode(Base64.decodeToString(actiCode), Base64.decodeToString(actiNameCode));
 		if(userId != null){
 			int res=0;
 			try {
