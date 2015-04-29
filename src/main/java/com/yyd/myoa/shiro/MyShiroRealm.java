@@ -18,7 +18,7 @@ import com.yyd.myoa.service.UserInfoService;
 
 public class MyShiroRealm extends AuthorizingRealm {
 	@Autowired
-	private UserInfoService userinfoRepositoryService;
+	private UserInfoService userInfoService;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -43,7 +43,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken userToken = (UsernamePasswordToken) token;
 		String userId = userToken.getUsername();
-		String hashPassword = userinfoRepositoryService.getUserPassword(userId);
+		String hashPassword = userInfoService.getUserPassword(userId);
 		if(hashPassword == null)
 			throw new UnknownAccountException("没有为 [" + userId + "] 找到用户信息");
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, hashPassword.toCharArray(), getName());

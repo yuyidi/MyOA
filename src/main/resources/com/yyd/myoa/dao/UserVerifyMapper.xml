@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.UserVerifyMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.UserVerify" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="acti_code" property="actiCode" jdbcType="VARCHAR" />
+    <result column="acti_name_code" property="actiNameCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, acti_code, acti_name_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_verify
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_verify
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.UserVerify" >
+    insert into user_verify (user_id, acti_code, acti_name_code
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{actiCode,jdbcType=VARCHAR}, #{actiNameCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.UserVerify" >
+    insert into user_verify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="actiCode != null" >
+        acti_code,
+      </if>
+      <if test="actiNameCode != null" >
+        acti_name_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="actiCode != null" >
+        #{actiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="actiNameCode != null" >
+        #{actiNameCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.UserVerify" >
+    update user_verify
+    <set >
+      <if test="actiCode != null" >
+        acti_code = #{actiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="actiNameCode != null" >
+        acti_name_code = #{actiNameCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.UserVerify" >
+    update user_verify
+    set acti_code = #{actiCode,jdbcType=VARCHAR},
+      acti_name_code = #{actiNameCode,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectVerifyByCode" resultType="String">
+  		select user_id from user_verify where acti_code = #{actiCode,jdbcType=VARCHAR} 
+  			and acti_name_code=#{actiNameCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

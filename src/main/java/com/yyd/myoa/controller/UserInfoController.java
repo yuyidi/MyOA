@@ -1,12 +1,11 @@
 package com.yyd.myoa.controller;
 
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
-import net.sf.ehcache.transaction.xa.processor.XARequest.RequestType;
+import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +23,7 @@ import com.yyd.myoa.service.UserInfoService;
 
 @Controller
 @RequestMapping("/user-info")
-public class UserInfoController {
+public class UserInfoController extends BaseController {
     
 	@Autowired
 	private UserInfoService userInfoService;
@@ -44,18 +43,32 @@ public class UserInfoController {
 	
 	/**
 	 * @throws ServiceException 
-	 * 
 	* @Title: register
 	* @Description: 用户注册
 	* @return void
 	* @throws
 	 */
-	@RequestMapping(value="/register")
-	public void register(UserInfo userInfo,ModelMap modelMap) throws ServiceException{
-		UserInfo user = new UserInfo("yyd", "余乙迪", "yuyidi0630", 1);
-		Integer result = userInfoService.registerUser(user);
-		if(result>0){
-			modelMap.put("result", "添加成功");
-		}
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	public String register(UserInfo userInfo,ModelMap model,HttpServletRequest request) throws ServiceException{
+		String result = userInfoService.registerUser(userInfo,request.getContextPath());
+		Map<String, String> map = new HashMap<String, String>();
+		log.debug(result);
+		map.put("message", result);
+//		creatJSONResult(model, map);
+		return "redirect:/login";
+	}
+	
+	/**
+	 * @throws ServiceException 
+	 * 
+	* @Title: verify
+	* @Description:验证邮箱注册
+	* @return void
+	* @throws
+	 */
+	@RequestMapping(value="/verify")
+	public String verify(@RequestParam("userActiCode") String userActiCode,@RequestParam("random") String random) throws ServiceException{
+		userInfoService.verify(random, userActiCode);
+		return "redirect:/login";
 	}
 }

@@ -5,6 +5,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -33,5 +34,12 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
         log.info("成功登录后的请求地址："+url);
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + url);
         return false;
+    }
+    
+    @Override
+    protected boolean onLoginFailure(AuthenticationToken token,
+    		AuthenticationException e, ServletRequest request,
+    		ServletResponse response) {
+    	return super.onLoginFailure(token, e, request, response);
     }
 }

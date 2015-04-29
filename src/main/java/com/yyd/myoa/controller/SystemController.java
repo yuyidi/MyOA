@@ -28,8 +28,7 @@ public class SystemController extends BaseController {
         token.setUsername(userId);
         token.setPassword(password.toCharArray());
         subject.login(token);
-        Map<String, String> map = new HashMap<String, String>();
-        return "redirect:/";
+        return "redirect:/index";
     }
 
     @RequestMapping(value="/400")
@@ -47,7 +46,7 @@ public class SystemController extends BaseController {
         return new ModelAndView("404");
     }
     
-    @RequestMapping(value="/")
+    @RequestMapping(value="/index")
     public ModelAndView index(){
         return new ModelAndView("index");
     }

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.yyd.myoa.query.PageQuery;
 
-public class BaseService<T> {
+public class BaseService {
 	Logger log = LoggerFactory.getLogger(getClass().getName());
 	public PageBounds createPageBounds(PageQuery query){
 		if(query == null){
