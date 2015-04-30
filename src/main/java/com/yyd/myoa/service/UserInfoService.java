@@ -107,6 +107,8 @@ public class UserInfoService extends BaseService {
 			} catch (Exception e) {
 				throw ServiceException.userRegisterError(e);
 			}
+		}else{
+			log.debug("已注册成功，不需要重新注册");
 		}
 	}
 }

@@ -1,8 +1,5 @@
 package com.yyd.myoa.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -21,14 +18,20 @@ public class SystemController extends BaseController {
         return "login";
     }
     
-    @RequestMapping(value="/login",method=RequestMethod.POST)
-    public String login(@RequestParam("userId")String userId,@RequestParam("password") String password,ModelMap model){
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken();
-        token.setUsername(userId);
-        token.setPassword(password.toCharArray());
-        subject.login(token);
-        return "redirect:/index";
+    @RequestMapping(value="/loging",method=RequestMethod.POST)
+    public String login(@RequestParam("username")String username,@RequestParam("password") String password,@RequestParam(value="rememberMe",required=false,defaultValue="0") Integer rememberMe,ModelMap model){
+    	System.out.println("111");
+//        Subject subject = SecurityUtils.getSubject();
+//        UsernamePasswordToken token = new UsernamePasswordToken();
+//        token.setUsername(username);
+//        token.setPassword(password.toCharArray());
+//        token.setRememberMe(false);
+//        if(rememberMe ==1){
+//        	token.setRememberMe(true);
+//        }
+//        subject.login(token);
+//        return "redirect:/index";
+    	return null;
     }
 
     @RequestMapping(value="/400")

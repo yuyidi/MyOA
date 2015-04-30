@@ -49,7 +49,7 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="/login" method="post">
+	<form class="login-form" action="/loging" method="post">
 		<div class="form-title">
 			<span class="form-title">Welcome.</span>
 			<span class="form-subtitle">Please login.</span>
@@ -62,7 +62,7 @@
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 			<label class="control-label visible-ie8 visible-ie9">用户名</label>
-			<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="userId"/>
+			<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
 		</div>
 		<div class="form-group">
 			<label class="control-label visible-ie8 visible-ie9">密码</label>
@@ -74,7 +74,7 @@
 		<div class="form-actions">
 			<div class="pull-left">
 				<label class="rememberme check">
-				<input type="checkbox" name="remember" value="1"/>记住我 </label>
+				<input type="checkbox" name="rememberMe" value="1"/>记住我 </label>
 			</div>
 			<div class="pull-right forget-password-block">
 				<a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>
