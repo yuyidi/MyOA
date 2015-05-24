@@ -49,7 +49,7 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="/login" method="post">
+	<form class="login-form" action="/loging" method="post">
 		<div class="form-title">
 			<span class="form-title">Welcome.</span>
 			<span class="form-subtitle">Please login.</span>
@@ -74,7 +74,7 @@
 		<div class="form-actions">
 			<div class="pull-left">
 				<label class="rememberme check">
-				<input type="checkbox" name="remember" value="1"/>记住我 </label>
+				<input type="checkbox" name="rememberMe" value="1"/>记住我 </label>
 			</div>
 			<div class="pull-right forget-password-block">
 				<a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>

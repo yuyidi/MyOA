@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 public class SystemController extends BaseController {
-    
-    @RequestMapping(value="/login",method=RequestMethod.GET)
-    public String login(){
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
         return "login";
     }
-    
-    @RequestMapping(value="/login",method=RequestMethod.POST)
-    public void login(@RequestParam("userId")String userId,@RequestParam("password") String password,ModelMap model){
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public void login(@RequestParam("userId") String userId, @RequestParam("password") String password,
+            ModelMap model) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken();
         token.setUsername(userId);
@@ -28,23 +31,27 @@ public class SystemController extends BaseController {
         subject.login(token);
     }
 
-    @RequestMapping(value="/400")
-    public ModelAndView badRequest(){
+
+    @RequestMapping(value = "/400")
+    public ModelAndView badRequest() {
         return new ModelAndView("400");
     }
-    
-    @RequestMapping(value="/500")
-    public ModelAndView serverError(){
+
+
+    @RequestMapping(value = "/500")
+    public ModelAndView serverError() {
         return new ModelAndView("500");
     }
-    
-    @RequestMapping(value="/404")
-    public ModelAndView resourceNotFound(){
+
+
+    @RequestMapping(value = "/404")
+    public ModelAndView resourceNotFound() {
         return new ModelAndView("404");
     }
-    
-    @RequestMapping(value="/index")
-    public ModelAndView index(){
+
+
+    @RequestMapping(value = "/index")
+    public ModelAndView index() {
         return new ModelAndView("index");
     }
 }
