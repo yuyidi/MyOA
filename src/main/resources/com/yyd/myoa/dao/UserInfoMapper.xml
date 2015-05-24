@@ -189,7 +189,7 @@
   		select <include refid="Base_Column_List"/> from user_info
   </select>
   <select id="selectPasswordByUserId" resultType="String" >
-  		select password from user_info where user_id = #{userId,jdbcType=VARCHAR} where state <![CDATA[<>]]> 0
+  		select password from user_info where user_id = #{userId,jdbcType=VARCHAR} and state <![CDATA[<>]]> 0
   </select>
   <update id="updateUserState" >
   	update user_info set state = #{state,jdbcType=INTEGER} where user_id = #{userId,jdbcType=VARCHAR}
