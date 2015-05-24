@@ -37,8 +37,7 @@
 					<value>
 						<!-- anon 表示不需要任何权限即可访问  -->
 						/assets/**=anon
-						/login=anon
-						/loging=authc
+						/login=authc
 						/400=anon
 						/404=anon
 						/500=anon
