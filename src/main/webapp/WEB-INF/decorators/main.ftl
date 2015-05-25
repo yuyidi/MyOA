@@ -6,7 +6,7 @@
 	<!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<title>MyOA</title>
+		<title>MYOA我的办公自动化</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<meta content="" name="description" />

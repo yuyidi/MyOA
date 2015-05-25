@@ -10,47 +10,48 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 public class SystemController extends BaseController {
-    
-    @RequestMapping(value="/login",method=RequestMethod.GET)
-    public String login(){
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
         return "login";
     }
-    
-    @RequestMapping(value="/loging",method=RequestMethod.POST)
-    public String login(@RequestParam("username")String username,@RequestParam("password") String password,@RequestParam(value="rememberMe",required=false,defaultValue="0") Integer rememberMe,ModelMap model){
-    	System.out.println("111");
-//        Subject subject = SecurityUtils.getSubject();
-//        UsernamePasswordToken token = new UsernamePasswordToken();
-//        token.setUsername(username);
-//        token.setPassword(password.toCharArray());
-//        token.setRememberMe(false);
-//        if(rememberMe ==1){
-//        	token.setRememberMe(true);
-//        }
-//        subject.login(token);
-//        return "redirect:/index";
-    	return null;
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public void login(@RequestParam("userId") String userId, @RequestParam("password") String password,
+            ModelMap model) {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken();
+        token.setUsername(userId);
+        token.setPassword(password.toCharArray());
+        token.setRememberMe(true);
+        subject.login(token);
     }
 
-    @RequestMapping(value="/400")
-    public ModelAndView badRequest(){
+
+    @RequestMapping(value = "/400")
+    public ModelAndView badRequest() {
         return new ModelAndView("400");
     }
-    
-    @RequestMapping(value="/500")
-    public ModelAndView serverError(){
+
+
+    @RequestMapping(value = "/500")
+    public ModelAndView serverError() {
         return new ModelAndView("500");
     }
-    
-    @RequestMapping(value="/404")
-    public ModelAndView resourceNotFound(){
+
+
+    @RequestMapping(value = "/404")
+    public ModelAndView resourceNotFound() {
         return new ModelAndView("404");
     }
-    
-    @RequestMapping(value="/index")
-    public ModelAndView index(){
+
+
+    @RequestMapping(value = "/index")
+    public ModelAndView index() {
         return new ModelAndView("index");
     }
 }

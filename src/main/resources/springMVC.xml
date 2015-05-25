@@ -26,13 +26,6 @@
 	<!-- 自动扫描controller包下所有的类 ，并作为springMVC的控制器 -->
 	<context:component-scan base-package="com.yyd.myoa.controller" />
 
-	<!-- 拦截器 -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.yyd.myoa.interceptor.GlobalInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 
 	<!-- 自定义的异常处理 -->
 	<bean id="exceptionHandler" class="com.yyd.myoa.exception.MVCExceptionHandler" />
@@ -128,10 +121,19 @@
 		<property name="freemarkerSettings" ref="freemarkerConfiguration" />
 		<property name="freemarkerVariables">
 			<map>
-				<entry key="project_title" value="MYOA 我的办公自动化"></entry>
+				<entry key="login_title" value="MYOA我的办公自动化"></entry>
 			</map>
 		</property>
 	</bean>
+	
+	<bean id="global" class="com.yyd.myoa.interceptor.GlobalInterceptor"/>
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<ref bean="global"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- springMVC上传配置 -->
 	<bean id="multipartResolver"

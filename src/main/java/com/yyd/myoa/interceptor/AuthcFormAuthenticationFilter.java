@@ -28,9 +28,8 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
             ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        subject.getSession().setAttribute(SystemConstant.SHIRO_USER,subject.getPrincipal());
+//        subject.getSession().setAttribute(SystemConstant.SHIRO_USER,subject.getPrincipal());
         String url = this.getSuccessUrl();
-        System.out.println(url+"---"+subject.getPrincipal());
         log.info("成功登录后的请求地址："+url);
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + url);
         return false;
@@ -40,7 +39,7 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
     protected boolean onLoginFailure(AuthenticationToken token,
     		AuthenticationException e, ServletRequest request,
     		ServletResponse response) {
-    	log.debug("登录失败");
+        log.debug("登录失败将日志信息保存");
     	return super.onLoginFailure(token, e, request, response);
     }
 }
