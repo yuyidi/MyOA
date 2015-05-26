@@ -20,7 +20,7 @@
 <!-- 	</listener> -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml,classpath:springDatasource.xml,classpath:springMybatis.xml,classpath:springShiro.xml,classpath:springMail.xml</param-value>
+		<param-value>classpath:applicationContext.xml,classpath:springMail.xml,classpath:springDatasource.xml,classpath:springMybatis.xml,classpath:springShiro.xml</param-value>
 	</context-param>
 	<!-- springMVC 配置 -->
 	<servlet>

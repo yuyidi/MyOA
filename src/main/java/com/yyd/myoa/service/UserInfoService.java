@@ -39,9 +39,6 @@ public class UserInfoService extends BaseService {
 	 */
 	public String getUserPassword(String userId) {
 		String password = userInfoMapper.selectPasswordByUserId(userId);
-		if (password == null) {
-			throw new UnknownAccountException("没有未 [" + userId + "] 用户找到账户信息");
-		}
 		return password;
 	}
 
