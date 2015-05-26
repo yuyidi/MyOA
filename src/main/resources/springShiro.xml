@@ -37,7 +37,7 @@
 					<value>
 						<!-- anon 表示不需要任何权限即可访问  -->
 						/assets/**=anon
-						/login=anon
+						/login=authc
 						/400=anon
 						/404=anon
 						/500=anon
@@ -45,7 +45,7 @@
 						/user-info/register=anon
 						/user-info/verify*=anon
 						<!-- 所有的请求 (除去配置的静态资源请求或请求地址为anon的请求都要通过登录验证,如果未登录则跳到/login）  -->
-						/**=anon
+						/**=authc
 					</value>
 				</property>
 		</bean>

@@ -120,7 +120,7 @@
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
 	<!-- BEGIN REGISTRATION FORM -->
-	<form class="register-form" action="/user-info/register" method="post">
+	<form class="register-form" action="${rc.contextPath}/user-info/register" method="post">
 		<div class="form-title">
 			<span class="form-title">注 册</span>
 		</div>
@@ -201,12 +201,6 @@ jQuery(document).ready(function() {
 	Layout.init(); // init current layout
 	Login.init();
 	Demo.init();
-	var result = '${result!"message"}';
-	if(result != 'message'){
-		var message = $('.alert-danger', $('.login-form'));
-		$(message).children("span").html(result)
-		$(message).show();
-	}
 });
 </script>
 <!-- END JAVASCRIPTS -->
