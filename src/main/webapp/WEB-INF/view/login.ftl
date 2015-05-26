@@ -49,15 +49,15 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="/loging" method="post">
+	<form class="login-form" action="${rc.contextPath}/login" method="post">
 		<div class="form-title">
-			<span class="form-title">Welcome.</span>
-			<span class="form-subtitle">Please login.</span>
+			<span class="form-title">欢迎.</span>
+			<span class="form-subtitle">请登录.</span>
 		</div>
 		<div class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
 			<span>
-			请输入用户名或密码. </span>
+			</span>
 		</div>
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -107,15 +107,15 @@
 	<!-- BEGIN FORGOT PASSWORD FORM -->
 	<form class="forget-form" action="index.html" method="post">
 		<div class="form-title">
-			<span class="form-title">Forget Password ?</span>
-			<span class="form-subtitle">Enter your e-mail to reset it.</span>
+			<span class="form-title">忘记密码 ?</span>
+			<span class="form-subtitle">输入邮箱并重新设置密码.</span>
 		</div>
 		<div class="form-group">
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
 		</div>
 		<div class="form-actions">
-			<button type="button" id="back-btn" class="btn btn-default">Back</button>
-			<button type="submit" class="btn btn-primary uppercase pull-right">Submit</button>
+			<button type="button" id="back-btn" class="btn btn-default">返回</button>
+			<button type="submit" class="btn btn-primary uppercase pull-right">提交</button>
 		</div>
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
@@ -140,7 +140,7 @@
 			 输入账户信息:
 		</p>
 		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">Username</label>
+			<label class="control-label visible-ie8 visible-ie9">用户名</label>
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="userId"/>
 		</div>
 		<div class="form-group">
@@ -148,7 +148,7 @@
 			<input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="密码" name="password"/>
 		</div>
 		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+			<label class="control-label visible-ie8 visible-ie9">重复密码</label>
 			<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="重复密码" name="rpassword"/>
 		</div>
 		<div class="form-group margin-top-20 margin-bottom-20">

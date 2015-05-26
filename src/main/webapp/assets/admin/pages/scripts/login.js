@@ -3,11 +3,12 @@ var Login = function() {
     var handleLogin = function() {
 
         $('.login-form').validate({
+        	debug:true,
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
             focusInvalid: false, // do not focus the last invalid input
             rules: {
-                username: {
+                userId: {
                     required: true
                 },
                 password: {
@@ -19,7 +20,7 @@ var Login = function() {
             },
 
             messages: {
-                username: {
+                userId: {
                     required: "用户名必填."
                 },
                 password: {
@@ -28,12 +29,11 @@ var Login = function() {
             },
 
             invalidHandler: function(event, validator) { //display error alert on form submit   
-                $('.alert-danger', $('.login-form')).show();
+//                $('.alert-danger', $('.login-form')).show();
             },
 
-            highlight: function(element) { // hightlight error inputs
-                $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+            highlight: function(element) { // hightlight error inputs 如果某一个表单输入框验证不通过，就给当前的输入框添加样式
+                $(element).closest('.form-group').addClass('has-error'); // set error class to the control group
             },
 
             success: function(label) {
@@ -42,7 +42,9 @@ var Login = function() {
             },
 
             errorPlacement: function(error, element) {
-                error.insertAfter(element.closest('.input-icon'));
+//            		element.parents('.form-group').children(".help-block").html(error);
+//                error.insertAfter(element.closest('.input-icon'));
+                error.insertAfter(element.closest('.form-group'));
             },
             submitHandler: function(form) {
             	 form.submit();// form validation success, call ajax form submit

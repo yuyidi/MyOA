@@ -22,6 +22,8 @@ import com.yyd.myoa.constant.SystemConstant;
 * @date 2015年4月28日 下午2:26:54*
  */
 public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
+    private String usernameParam;
+   
     Logger log = LoggerFactory.getLogger(AuthcFormAuthenticationFilter.class);
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,
@@ -42,4 +44,8 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
         log.debug("登录失败将日志信息保存");
     	return super.onLoginFailure(token, e, request, response);
     }
+    
+    public void setUsernameParam(String usernameParam) {
+        super.setUsernameParam(usernameParam);
+    };
 }
