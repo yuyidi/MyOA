@@ -37,7 +37,8 @@ public class UserInfoController extends BaseController {
 	    model.put("result", userInfos);
 	}
 	@RequestMapping(value="/demo")
-	public String demo(){
+	public String demo(@RequestParam("name")String demo){
+		System.out.println(demo);
 	    return "demo";
 	}
 	

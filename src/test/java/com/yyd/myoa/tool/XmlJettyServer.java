@@ -9,7 +9,7 @@ import org.eclipse.jetty.xml.XmlConfiguration;
 public class XmlJettyServer {
 	
 	public static void main(String[] args) throws Exception {
-		Server server = buildNormalServer(8080, "/myoa");
+		Server server = buildNormalServer(8081, "/myoa");
 		server.setAttribute("org.eclipse.jetty.util.URI.charset", "UTF-8");
 		server.start();
 	}
