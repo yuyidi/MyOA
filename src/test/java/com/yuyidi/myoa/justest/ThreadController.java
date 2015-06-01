@@ -1,8 +1,4 @@
-package com.yyd.myoa.tool;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+package com.yuyidi.myoa.justest;
 
 public class ThreadController implements Runnable {
 

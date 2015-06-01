@@ -1,4 +1,4 @@
-package com.yyd.myoa.tool;
+package com.yuyidi.myoa.justest;
 
 public class User{
 	 private Integer id;
