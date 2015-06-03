@@ -25,7 +25,6 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
 
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
             Object handler, Exception ex) {
-        Map<String, Object> model = new HashMap<String, Object>();
         ModelAndView mv = new ModelAndView();
         // 此处可以根据不用的异常返回不同的视图
         String message = "未知错误";
@@ -33,25 +32,24 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
         try {
           //验证错误异常(参数异常)
             if(ex instanceof ValidateException){
-                message = ex.getMessage();
+            	ValidateException ve = (ValidateException) ex;
+                message = ve.showMsg();
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                mv.setViewName("400");
             }
             //业务层异常处理
             if(ex instanceof ServiceException){
                 ServiceException se = (ServiceException) ex;
                 message = se.showMsg();
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//                mv.setViewName("400");
             }
             //权限，未知账户异常
             if(ex instanceof UnknownAccountException){
-                message = ex.getMessage();
+                message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
             //权限，密码错误异常
             if(ex instanceof IncorrectCredentialsException){
-                message = SystemConstant.INCORRECT_CREDENTIALS_EXCEPTION;
+                message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
             //权限，账户已锁定异常

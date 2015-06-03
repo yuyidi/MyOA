@@ -2,6 +2,7 @@ package com.yyd.myoa.interceptor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,12 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
 
 import com.alibaba.fastjson.JSON;
+import com.yyd.myoa.model.LoginLog;
+import com.yyd.myoa.service.UserInfoService;
+import com.yyd.myoa.utils.HttpUtils;
 
 /**
  * 
@@ -29,7 +34,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
 	Logger log = LoggerFactory.getLogger(AuthcFormAuthenticationFilter.class);
-
+	private UserInfoService userInfoService;
 	@Override
 	protected boolean onLoginSuccess(AuthenticationToken token,
 			Subject subject, ServletRequest request, ServletResponse response)
@@ -37,6 +42,7 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		// subject.getSession().setAttribute(SystemConstant.SHIRO_USER,subject.getPrincipal());
+		userInfoService.loginLog(new LoginLog(subject.getPrincipal().toString(), new Date(), 1, HttpUtils.getIp(httpServletRequest), "登录成功"));
 		String url = this.getSuccessUrl();
 		log.info("成功登录后的请求地址：" + url);
 		httpServletResponse.sendRedirect(httpServletRequest.getContextPath()
@@ -49,14 +55,6 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
 			AuthenticationException e, ServletRequest request,
 			ServletResponse response) {
 		log.debug("登录失败将日志信息保存");
-		try {
-			PrintWriter out = response.getWriter();
-			if(e.getCause() instanceof UnknownAccountException){
-				out.print(JSON.toJSON("未知账户异常"));
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		return super.onLoginFailure(token, e, request, response);
 	}
 
@@ -68,5 +66,9 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
 
 	public void setUsernameParam(String usernameParam) {
 		super.setUsernameParam(usernameParam);
+	}
+
+	public void setUserInfoService(UserInfoService userInfoService) {
+		this.userInfoService = userInfoService;
 	};
 }

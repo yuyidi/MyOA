@@ -12,8 +12,8 @@ public class SystemConstant {
 //	session 中管理员的Key
 	public static final String SYSTEM_ADMIN="SYSTEM_ADMIN";
 	public static final String SHIRO_USER="shiroUser";
-    public static final String UNKNOWN_ACCOUNT_EXCEPTION = "账号错误!";
-    public static final String INCORRECT_CREDENTIALS_EXCEPTION = "密码错误!";
+    public static final String UNKNOWN_ACCOUNT_EXCEPTION = "账号错误或密码!";
+//    public static final String INCORRECT_CREDENTIALS_EXCEPTION = "密码错误!";
     public static final String LOCKED_ACCOUNT_EXCEPTION = "账号已被锁定，请与系统管理员联系!";
     public static final String AUTHENTICATION_EXCEPTION = "您没有授权!";
     

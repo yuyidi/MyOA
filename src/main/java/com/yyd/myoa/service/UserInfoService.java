@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.yyd.myoa.constant.SystemConstant;
+import com.yyd.myoa.dao.LoginLogMapper;
 import com.yyd.myoa.dao.UserInfoMapper;
 import com.yyd.myoa.dao.UserVerifyMapper;
 import com.yyd.myoa.exception.ServiceException;
+import com.yyd.myoa.model.LoginLog;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.model.UserVerify;
 import com.yyd.myoa.query.UserInfoQuery;
@@ -27,6 +29,8 @@ public class UserInfoService extends BaseService {
 	private PasswordService passwordService;
 	@Autowired
 	private UserVerifyMapper userVerifyMapper;
+	@Autowired
+	private LoginLogMapper loginLogMapper;
 	@Resource(name="simpleMail")
 	private Mail mail;
 
@@ -107,5 +111,16 @@ public class UserInfoService extends BaseService {
 		}else{
 			log.debug("已注册成功，不需要重新注册");
 		}
+	}
+	
+	/**
+	 * 
+	* @Title: loginLog
+	* @Description: 用户登录日志
+	* @return void
+	* @throws
+	 */
+	public void loginLog(LoginLog log){
+		loginLogMapper.insert(log);
 	}
 }

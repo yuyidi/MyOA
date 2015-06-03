@@ -19,6 +19,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 		<bean id="authcFormAuthenticationFilter" class="com.yyd.myoa.interceptor.AuthcFormAuthenticationFilter">
 			<property name="usernameParam" value="userId"/>
+			<property name="userInfoService" ref="userInfoService"/>
 		</bean>
 		<!-- shiro filter -->
 		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" >

@@ -12,7 +12,6 @@ public class ServiceExceptionMap {
     public static  Map<String, String> exceptionMap = new HashMap<String, String>();
     
     static{
-        exceptionMap.put(ServiceException.USER_INFO_ERROR, "用户ID或密码错误");
         exceptionMap.put(ServiceException.USER_REGISTER_ERROR, "用户注册错误");
     }
 }
