@@ -21,8 +21,6 @@ public class UserInfo {
 
     private String userPricter;
 
-    private Integer state;
-
     private String actiCode;
 
     private String actiCodeName;
@@ -105,14 +103,6 @@ public class UserInfo {
 
     public void setUserPricter(String userPricter) {
         this.userPricter = userPricter == null ? null : userPricter.trim();
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 
     public String getActiCode() {

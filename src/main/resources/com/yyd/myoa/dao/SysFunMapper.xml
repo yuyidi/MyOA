@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.SysFunMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.SysFun" >
+    <id column="node_id" property="nodeId" jdbcType="INTEGER" />
+    <result column="display_name" property="displayName" jdbcType="VARCHAR" />
+    <result column="node_url" property="nodeUrl" jdbcType="VARCHAR" />
+    <result column="display_order" property="displayOrder" jdbcType="INTEGER" />
+    <result column="parent_node_id" property="parentNodeId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    node_id, display_name, node_url, display_order, parent_node_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_fun
+    where node_id = #{nodeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_fun
+    where node_id = #{nodeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.SysFun" >
+    insert into sys_fun (node_id, display_name, node_url, 
+      display_order, parent_node_id)
+    values (#{nodeId,jdbcType=INTEGER}, #{displayName,jdbcType=VARCHAR}, #{nodeUrl,jdbcType=VARCHAR}, 
+      #{displayOrder,jdbcType=INTEGER}, #{parentNodeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.SysFun" >
+    insert into sys_fun
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        node_id,
+      </if>
+      <if test="displayName != null" >
+        display_name,
+      </if>
+      <if test="nodeUrl != null" >
+        node_url,
+      </if>
+      <if test="displayOrder != null" >
+        display_order,
+      </if>
+      <if test="parentNodeId != null" >
+        parent_node_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        #{nodeId,jdbcType=INTEGER},
+      </if>
+      <if test="displayName != null" >
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeUrl != null" >
+        #{nodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null" >
+        #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="parentNodeId != null" >
+        #{parentNodeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.SysFun" >
+    update sys_fun
+    <set >
+      <if test="displayName != null" >
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeUrl != null" >
+        node_url = #{nodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null" >
+        display_order = #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="parentNodeId != null" >
+        parent_node_id = #{parentNodeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where node_id = #{nodeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.SysFun" >
+    update sys_fun
+    set display_name = #{displayName,jdbcType=VARCHAR},
+      node_url = #{nodeUrl,jdbcType=VARCHAR},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      parent_node_id = #{parentNodeId,jdbcType=INTEGER}
+    where node_id = #{nodeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -43,7 +43,7 @@
 					1349
 				</div>
 				<div class="desc">
-					New Feedbacks
+					消息
 				</div>
 			</div>
 			<a class="more" href="#">
@@ -61,7 +61,7 @@
 					12,5M$
 				</div>
 				<div class="desc">
-					Total Profit
+					预约
 				</div>
 			</div>
 			<a class="more" href="#">
@@ -79,17 +79,11 @@
 					549
 				</div>
 				<div class="desc">
-					New Orders
+					考勤
 				</div>
 			</div>
 			<a class="more" href="#">
-
-
-
 						View more <i class="m-icon-swapright m-icon-white"></i>
-
-
-
 						</a>
 		</div>
 	</div>
@@ -103,17 +97,11 @@
 					+89%
 				</div>
 				<div class="desc">
-					Brand Popularity
+					便签
 				</div>
 			</div>
 			<a class="more" href="#">
-
-
-
 						View more <i class="m-icon-swapright m-icon-white"></i>
-
-
-
 						</a>
 		</div>
 	</div>

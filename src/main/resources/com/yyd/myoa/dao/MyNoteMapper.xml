@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.MyNoteMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.MyNote" >
+    <id column="note_id" property="noteId" jdbcType="INTEGER" />
+    <result column="note_title" property="noteTitle" jdbcType="VARCHAR" />
+    <result column="note_content" property="noteContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    note_id, note_title, note_content, create_time, create_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_note
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from my_note
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.MyNote" >
+    insert into my_note (note_id, note_title, note_content, 
+      create_time, create_user)
+    values (#{noteId,jdbcType=INTEGER}, #{noteTitle,jdbcType=VARCHAR}, #{noteContent,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.MyNote" >
+    insert into my_note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noteId != null" >
+        note_id,
+      </if>
+      <if test="noteTitle != null" >
+        note_title,
+      </if>
+      <if test="noteContent != null" >
+        note_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noteId != null" >
+        #{noteId,jdbcType=INTEGER},
+      </if>
+      <if test="noteTitle != null" >
+        #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noteContent != null" >
+        #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.MyNote" >
+    update my_note
+    <set >
+      <if test="noteTitle != null" >
+        note_title = #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noteContent != null" >
+        note_content = #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.MyNote" >
+    update my_note
+    set note_title = #{noteTitle,jdbcType=VARCHAR},
+      note_content = #{noteContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR}
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </update>
+</mapper>

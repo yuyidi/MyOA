@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.MessageTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.MessageType" >
+    <id column="message_type_id" property="messageTypeId" jdbcType="INTEGER" />
+    <result column="message_type_name" property="messageTypeName" jdbcType="VARCHAR" />
+    <result column="message_desc" property="messageDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    message_type_id, message_type_name, message_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message_type
+    where message_type_id = #{messageTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message_type
+    where message_type_id = #{messageTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.MessageType" >
+    insert into message_type (message_type_id, message_type_name, message_desc
+      )
+    values (#{messageTypeId,jdbcType=INTEGER}, #{messageTypeName,jdbcType=VARCHAR}, #{messageDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.MessageType" >
+    insert into message_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageTypeId != null" >
+        message_type_id,
+      </if>
+      <if test="messageTypeName != null" >
+        message_type_name,
+      </if>
+      <if test="messageDesc != null" >
+        message_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageTypeId != null" >
+        #{messageTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="messageTypeName != null" >
+        #{messageTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDesc != null" >
+        #{messageDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.MessageType" >
+    update message_type
+    <set >
+      <if test="messageTypeName != null" >
+        message_type_name = #{messageTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDesc != null" >
+        message_desc = #{messageDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where message_type_id = #{messageTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.MessageType" >
+    update message_type
+    set message_type_name = #{messageTypeName,jdbcType=VARCHAR},
+      message_desc = #{messageDesc,jdbcType=VARCHAR}
+    where message_type_id = #{messageTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

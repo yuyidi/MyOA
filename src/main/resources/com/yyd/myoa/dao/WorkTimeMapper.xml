@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.WorkTimeMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.WorkTime" >
+    <id column="work_time_id" property="workTimeId" jdbcType="INTEGER" />
+    <result column="on_duty_time" property="onDutyTime" jdbcType="VARCHAR" />
+    <result column="off_duty_time" property="offDutyTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    work_time_id, on_duty_time, off_duty_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from work_time
+    where work_time_id = #{workTimeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from work_time
+    where work_time_id = #{workTimeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.WorkTime" >
+    insert into work_time (work_time_id, on_duty_time, off_duty_time
+      )
+    values (#{workTimeId,jdbcType=INTEGER}, #{onDutyTime,jdbcType=VARCHAR}, #{offDutyTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.WorkTime" >
+    insert into work_time
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workTimeId != null" >
+        work_time_id,
+      </if>
+      <if test="onDutyTime != null" >
+        on_duty_time,
+      </if>
+      <if test="offDutyTime != null" >
+        off_duty_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workTimeId != null" >
+        #{workTimeId,jdbcType=INTEGER},
+      </if>
+      <if test="onDutyTime != null" >
+        #{onDutyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="offDutyTime != null" >
+        #{offDutyTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.WorkTime" >
+    update work_time
+    <set >
+      <if test="onDutyTime != null" >
+        on_duty_time = #{onDutyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="offDutyTime != null" >
+        off_duty_time = #{offDutyTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where work_time_id = #{workTimeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.WorkTime" >
+    update work_time
+    set on_duty_time = #{onDutyTime,jdbcType=VARCHAR},
+      off_duty_time = #{offDutyTime,jdbcType=VARCHAR}
+    where work_time_id = #{workTimeId,jdbcType=INTEGER}
+  </update>
+</mapper>

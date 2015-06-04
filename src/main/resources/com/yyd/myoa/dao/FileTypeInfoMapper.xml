@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.FileTypeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.FileTypeInfo" >
+    <id column="file_type_id" property="fileTypeId" jdbcType="INTEGER" />
+    <result column="file_type_name" property="fileTypeName" jdbcType="VARCHAR" />
+    <result column="file_type_image" property="fileTypeImage" jdbcType="VARCHAR" />
+    <result column="file_type_suffix" property="fileTypeSuffix" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    file_type_id, file_type_name, file_type_image, file_type_suffix
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_type_info
+    where file_type_id = #{fileTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from file_type_info
+    where file_type_id = #{fileTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.FileTypeInfo" >
+    insert into file_type_info (file_type_id, file_type_name, file_type_image, 
+      file_type_suffix)
+    values (#{fileTypeId,jdbcType=INTEGER}, #{fileTypeName,jdbcType=VARCHAR}, #{fileTypeImage,jdbcType=VARCHAR}, 
+      #{fileTypeSuffix,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.FileTypeInfo" >
+    insert into file_type_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileTypeId != null" >
+        file_type_id,
+      </if>
+      <if test="fileTypeName != null" >
+        file_type_name,
+      </if>
+      <if test="fileTypeImage != null" >
+        file_type_image,
+      </if>
+      <if test="fileTypeSuffix != null" >
+        file_type_suffix,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileTypeId != null" >
+        #{fileTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="fileTypeName != null" >
+        #{fileTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTypeImage != null" >
+        #{fileTypeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTypeSuffix != null" >
+        #{fileTypeSuffix,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.FileTypeInfo" >
+    update file_type_info
+    <set >
+      <if test="fileTypeName != null" >
+        file_type_name = #{fileTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTypeImage != null" >
+        file_type_image = #{fileTypeImage,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTypeSuffix != null" >
+        file_type_suffix = #{fileTypeSuffix,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where file_type_id = #{fileTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.FileTypeInfo" >
+    update file_type_info
+    set file_type_name = #{fileTypeName,jdbcType=VARCHAR},
+      file_type_image = #{fileTypeImage,jdbcType=VARCHAR},
+      file_type_suffix = #{fileTypeSuffix,jdbcType=VARCHAR}
+    where file_type_id = #{fileTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

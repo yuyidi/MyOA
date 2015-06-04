@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.OperateLogMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.OperateLog" >
+    <id column="operate_id" property="operateId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+    <result column="object_id" property="objectId" jdbcType="VARCHAR" />
+    <result column="operate_desc" property="operateDesc" jdbcType="VARCHAR" />
+    <result column="operate_date" property="operateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    operate_id, user_id, operate_name, object_id, operate_desc, operate_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from operate_log
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from operate_log
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.OperateLog" >
+    insert into operate_log (operate_id, user_id, operate_name, 
+      object_id, operate_desc, operate_date
+      )
+    values (#{operateId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{operateName,jdbcType=VARCHAR}, 
+      #{objectId,jdbcType=VARCHAR}, #{operateDesc,jdbcType=VARCHAR}, #{operateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.OperateLog" >
+    insert into operate_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operateId != null" >
+        operate_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="operateName != null" >
+        operate_name,
+      </if>
+      <if test="objectId != null" >
+        object_id,
+      </if>
+      <if test="operateDesc != null" >
+        operate_desc,
+      </if>
+      <if test="operateDate != null" >
+        operate_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operateId != null" >
+        #{operateId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null" >
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDesc != null" >
+        #{operateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null" >
+        #{operateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.OperateLog" >
+    update operate_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null" >
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null" >
+        object_id = #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDesc != null" >
+        operate_desc = #{operateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null" >
+        operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.OperateLog" >
+    update operate_log
+    set user_id = #{userId,jdbcType=VARCHAR},
+      operate_name = #{operateName,jdbcType=VARCHAR},
+      object_id = #{objectId,jdbcType=VARCHAR},
+      operate_desc = #{operateDesc,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=TIMESTAMP}
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.AccessoryFileMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.AccessoryFile" >
+    <id column="accessory_id" property="accessoryId" jdbcType="INTEGER" />
+    <result column="file_id" property="fileId" jdbcType="INTEGER" />
+    <result column="accessory_name" property="accessoryName" jdbcType="VARCHAR" />
+    <result column="accessory_size" property="accessorySize" jdbcType="INTEGER" />
+    <result column="accessory_type" property="accessoryType" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="accessory_path" property="accessoryPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    accessory_id, file_id, accessory_name, accessory_size, accessory_type, create_date, 
+    accessory_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from accessory_file
+    where accessory_id = #{accessoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from accessory_file
+    where accessory_id = #{accessoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.AccessoryFile" >
+    insert into accessory_file (accessory_id, file_id, accessory_name, 
+      accessory_size, accessory_type, create_date, 
+      accessory_path)
+    values (#{accessoryId,jdbcType=INTEGER}, #{fileId,jdbcType=INTEGER}, #{accessoryName,jdbcType=VARCHAR}, 
+      #{accessorySize,jdbcType=INTEGER}, #{accessoryType,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{accessoryPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.AccessoryFile" >
+    insert into accessory_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accessoryId != null" >
+        accessory_id,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="accessoryName != null" >
+        accessory_name,
+      </if>
+      <if test="accessorySize != null" >
+        accessory_size,
+      </if>
+      <if test="accessoryType != null" >
+        accessory_type,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="accessoryPath != null" >
+        accessory_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accessoryId != null" >
+        #{accessoryId,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="accessoryName != null" >
+        #{accessoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="accessorySize != null" >
+        #{accessorySize,jdbcType=INTEGER},
+      </if>
+      <if test="accessoryType != null" >
+        #{accessoryType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessoryPath != null" >
+        #{accessoryPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.AccessoryFile" >
+    update accessory_file
+    <set >
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="accessoryName != null" >
+        accessory_name = #{accessoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="accessorySize != null" >
+        accessory_size = #{accessorySize,jdbcType=INTEGER},
+      </if>
+      <if test="accessoryType != null" >
+        accessory_type = #{accessoryType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessoryPath != null" >
+        accessory_path = #{accessoryPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where accessory_id = #{accessoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.AccessoryFile" >
+    update accessory_file
+    set file_id = #{fileId,jdbcType=INTEGER},
+      accessory_name = #{accessoryName,jdbcType=VARCHAR},
+      accessory_size = #{accessorySize,jdbcType=INTEGER},
+      accessory_type = #{accessoryType,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      accessory_path = #{accessoryPath,jdbcType=VARCHAR}
+    where accessory_id = #{accessoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

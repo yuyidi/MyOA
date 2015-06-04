@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.ReadCommonMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.ReadCommonMessage" >
+    <id column="read_id" property="readId" jdbcType="INTEGER" />
+    <result column="message_id" property="messageId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    read_id, message_id, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from read_common_message
+    where read_id = #{readId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from read_common_message
+    where read_id = #{readId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.ReadCommonMessage" >
+    insert into read_common_message (read_id, message_id, user_id
+      )
+    values (#{readId,jdbcType=INTEGER}, #{messageId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.ReadCommonMessage" >
+    insert into read_common_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="readId != null" >
+        read_id,
+      </if>
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="readId != null" >
+        #{readId,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.ReadCommonMessage" >
+    update read_common_message
+    <set >
+      <if test="messageId != null" >
+        message_id = #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where read_id = #{readId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.ReadCommonMessage" >
+    update read_common_message
+    set message_id = #{messageId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where read_id = #{readId,jdbcType=INTEGER}
+  </update>
+</mapper>

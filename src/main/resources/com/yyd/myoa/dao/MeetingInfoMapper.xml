@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.myoa.dao.MeetingInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yyd.myoa.model.MeetingInfo" >
+    <id column="meeting_id" property="meetingId" jdbcType="INTEGER" />
+    <result column="metting_name" property="mettingName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    meeting_id, metting_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from meeting_info
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from meeting_info
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyd.myoa.model.MeetingInfo" >
+    insert into meeting_info (meeting_id, metting_name)
+    values (#{meetingId,jdbcType=INTEGER}, #{mettingName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyd.myoa.model.MeetingInfo" >
+    insert into meeting_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="meetingId != null" >
+        meeting_id,
+      </if>
+      <if test="mettingName != null" >
+        metting_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="meetingId != null" >
+        #{meetingId,jdbcType=INTEGER},
+      </if>
+      <if test="mettingName != null" >
+        #{mettingName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyd.myoa.model.MeetingInfo" >
+    update meeting_info
+    <set >
+      <if test="mettingName != null" >
+        metting_name = #{mettingName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyd.myoa.model.MeetingInfo" >
+    update meeting_info
+    set metting_name = #{mettingName,jdbcType=VARCHAR}
+    where meeting_id = #{meetingId,jdbcType=INTEGER}
+  </update>
+</mapper>

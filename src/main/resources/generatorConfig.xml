@@ -23,11 +23,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.yyd.myoa.dao" targetProject="src\main\java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
-<!--         <table tableName="user_info" domainObjectName="UserInfo" enableCountByExample="false" -->
-<!-- 			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" -->
-<!-- 			enableInsert="true"> -->
-<!-- 		</table> -->
-		<table tableName="login_log" domainObjectName="LoginLog" enableCountByExample="false"
+		<table tableName="work_time" domainObjectName="WorkTime" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
 			enableInsert="true">
 		</table>
