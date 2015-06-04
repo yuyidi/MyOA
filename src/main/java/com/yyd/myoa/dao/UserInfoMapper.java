@@ -9,5 +9,5 @@ public interface UserInfoMapper extends BaseMapper<UserInfo, String, UserInfoQue
 	//登录验证密码
 	String selectPasswordByUserId(String userId);
 	//根据用户id更改用户状态
-	Integer updateUserState(@Param("state")Integer state,@Param("userId")String userId);
+	Integer updateUserState(@Param("userState")Integer userState,@Param("userId")String userId);
 }

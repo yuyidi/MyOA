@@ -12,13 +12,12 @@
     <result column="user_state" jdbcType="INTEGER" property="userState" />
     <result column="if_delete_user" jdbcType="INTEGER" property="ifDeleteUser" />
     <result column="user_pricter" jdbcType="VARCHAR" property="userPricter" />
-    <result column="state" jdbcType="INTEGER" property="state" />
     <result column="acti_code" jdbcType="VARCHAR" property="actiCode" />
     <result column="acti_code_name" jdbcType="VARCHAR" property="actiCodeName" />
   </resultMap>
   <sql id="Base_Column_List">
     user_id, user_name, password, email, depart_id, gender, role_id, user_state, if_delete_user, 
-    user_pricter, state, acti_code, acti_code_name
+    user_pricter, acti_code, acti_code_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -34,12 +33,12 @@
     insert into user_info (user_id, user_name, password, 
       email, depart_id, gender, 
       role_id, user_state, if_delete_user, 
-      user_pricter, state, acti_code, 
+      user_pricter, acti_code, 
       acti_code_name)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{departId,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, 
       #{roleId,jdbcType=INTEGER}, #{userState,jdbcType=INTEGER}, #{ifDeleteUser,jdbcType=INTEGER}, 
-      #{userPricter,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{actiCode,jdbcType=VARCHAR}, 
+      #{userPricter,jdbcType=VARCHAR}, #{actiCode,jdbcType=VARCHAR}, 
       #{actiCodeName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yyd.myoa.model.UserInfo">
@@ -74,9 +73,6 @@
       </if>
       <if test="userPricter != null">
         user_pricter,
-      </if>
-      <if test="state != null">
-        state,
       </if>
       <if test="actiCode != null">
         acti_code,
@@ -116,9 +112,6 @@
       <if test="userPricter != null">
         #{userPricter,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
       <if test="actiCode != null">
         #{actiCode,jdbcType=VARCHAR},
       </if>
@@ -157,9 +150,6 @@
       <if test="userPricter != null">
         user_pricter = #{userPricter,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
-      </if>
       <if test="actiCode != null">
         acti_code = #{actiCode,jdbcType=VARCHAR},
       </if>
@@ -180,7 +170,6 @@
       user_state = #{userState,jdbcType=INTEGER},
       if_delete_user = #{ifDeleteUser,jdbcType=INTEGER},
       user_pricter = #{userPricter,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
       acti_code = #{actiCode,jdbcType=VARCHAR},
       acti_code_name = #{actiCodeName,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
@@ -189,9 +178,9 @@
   		select <include refid="Base_Column_List"/> from user_info
   </select>
   <select id="selectPasswordByUserId" resultType="String" >
-  		select password from user_info where user_id = #{userId,jdbcType=VARCHAR} and state <![CDATA[<>]]> 0
+  		select password from user_info where user_id = #{userId,jdbcType=VARCHAR} and user_state <![CDATA[<>]]> 1
   </select>
   <update id="updateUserState" >
-  	update user_info set state = #{state,jdbcType=INTEGER} where user_id = #{userId,jdbcType=VARCHAR}
+  	update user_info set user_state = #{userState,jdbcType=INTEGER} where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

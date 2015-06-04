@@ -44,7 +44,7 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
             }
             //权限，未知账户异常
             if(ex instanceof UnknownAccountException){
-                message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
+                message = ex.getMessage();
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
             //权限，密码错误异常

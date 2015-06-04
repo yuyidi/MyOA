@@ -101,7 +101,7 @@ public class UserInfoService extends BaseService {
 		if(userId != null){
 			int res=0;
 			try {
-				res = userInfoMapper.updateUserState(1, userId);
+				res = userInfoMapper.updateUserState(2, userId);
 				if(res>0){
 					userVerifyMapper.deleteByPrimaryKey(userId);
 				}
@@ -109,7 +109,7 @@ public class UserInfoService extends BaseService {
 				throw ServiceException.userRegisterError(e);
 			}
 		}else{
-			log.debug("已注册成功，不需要重新注册");
+			throw new ServiceException("你已注册或请先输入注册信息");
 		}
 	}
 	

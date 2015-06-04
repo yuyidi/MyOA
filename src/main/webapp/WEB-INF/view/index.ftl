@@ -47,14 +47,8 @@
 				</div>
 			</div>
 			<a class="more" href="#">
-
-
-
 						View more <i class="m-icon-swapright m-icon-white"></i>
-
-
-
-						</a>
+			</a>
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -71,14 +65,8 @@
 				</div>
 			</div>
 			<a class="more" href="#">
-
-
-
 						View more <i class="m-icon-swapright m-icon-white"></i>
-
-
-
-						</a>
+			</a>
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

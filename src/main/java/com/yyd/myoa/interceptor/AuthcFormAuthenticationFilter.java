@@ -1,10 +1,6 @@
 package com.yyd.myoa.interceptor;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,14 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpMethod;
 
-import com.alibaba.fastjson.JSON;
 import com.yyd.myoa.model.LoginLog;
 import com.yyd.myoa.service.UserInfoService;
 import com.yyd.myoa.utils.HttpUtils;
@@ -41,7 +34,6 @@ public class AuthcFormAuthenticationFilter extends FormAuthenticationFilter {
 			throws Exception {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-		// subject.getSession().setAttribute(SystemConstant.SHIRO_USER,subject.getPrincipal());
 		userInfoService.loginLog(new LoginLog(subject.getPrincipal().toString(), new Date(), 1, HttpUtils.getIp(httpServletRequest), "登录成功"));
 		String url = this.getSuccessUrl();
 		log.info("成功登录后的请求地址：" + url);

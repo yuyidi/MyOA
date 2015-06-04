@@ -29,6 +29,7 @@ public class SystemController extends BaseController {
         token.setPassword(password.toCharArray());
         token.setRememberMe(true);
         subject.login(token);
+        model.addAttribute("success", "/index");
     }
 
 

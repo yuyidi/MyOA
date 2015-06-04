@@ -7,7 +7,12 @@ public class ServiceException extends Exception {
     public static final String USER_REGISTER_ERROR="002";
     
     private String type;
+    
 
+    public ServiceException(String type) {
+        this.type = type;
+    }
+    
     public ServiceException(String type,Exception exp) {
         super(exp);
         this.type = type;

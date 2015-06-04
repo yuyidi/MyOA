@@ -416,8 +416,8 @@
 								<i class="icon-lock"></i> Lock Screen </a>
 						</li>
 						<li>
-							<a href="login.html">
-								<i class="icon-key"></i> Log Out </a>
+							<a href="${rc.contextPath}/logout">
+								<i class="icon-key"></i> 注销 </a>
 						</li>
 					</ul>
 				</li>

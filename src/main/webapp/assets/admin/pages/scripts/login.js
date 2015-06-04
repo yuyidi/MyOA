@@ -42,12 +42,24 @@ var Login = function() {
             },
 
             errorPlacement: function(error, element) {
-//            		element.parents('.form-group').children(".help-block").html(error);
 //                error.insertAfter(element.closest('.input-icon'));
-                error.insertAfter(element.closest('.form-group'));
+                error.insertAfter(element);
             },
             submitHandler: function(form) {
-            	 form.submit();// form validation success, call ajax form submit
+//            	 form.submit();// form validation success, call ajax form submit
+            	var login = $(form);
+            	 $.ajax({
+            		 url:form.action,
+            		 data:login.serialize(),
+            		 type:form.method,
+            		 dataType:'json',
+            		 success:function(data){
+            			 window.location.href=data.success;
+            		 },error: function(XMLHttpRequest, textStatus, errorThrown) {
+            			 $("#login_error").html(XMLHttpRequest.responseJSON.result);
+            			 $('.alert-danger', $('.login-form')).show();
+                     }
+            	 });
             }
         });
 
@@ -76,7 +88,7 @@ var Login = function() {
 
             messages: {
                 email: {
-                    required: "Email is required."
+                    required: "必须填写Email."
                 }
             },
 
@@ -95,7 +107,8 @@ var Login = function() {
             },
 
             errorPlacement: function(error, element) {
-                error.insertAfter(element.closest('.input-icon'));
+                error.insertAfter(element);
+//                error.insertAfter(element.closest('.input-icon'));
             },
 
             submitHandler: function(form) {
