@@ -14,10 +14,11 @@
 	<listener>
 		<listener-class>com.github.miemiedev.mybatis.paginator.CleanupMybatisPaginatorListener</listener-class>
 	</listener>
-	<!-- shiro实现提供相应的SecurityManager及相应的依赖，shiroFilter会自动找到Environment然后获取相应的依赖 对应使用ini的配置方式 -->
-<!-- 	<listener> -->
-<!-- 		<listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class> -->
-<!-- 	</listener> -->
+	<!-- shiro实现提供相应的SecurityManager及相应的依赖，shiroFilter会自动找到Environment然后获取相应的依赖 
+		对应使用ini的配置方式 -->
+	<!-- <listener> -->
+	<!-- <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class> -->
+	<!-- </listener> -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml,classpath:springMail.xml,classpath:springDatasource.xml,classpath:springMybatis.xml,classpath:springShiro.xml</param-value>
@@ -45,7 +46,7 @@
 		<servlet-name>DruidStatView</servlet-name>
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	<servlet>
 		<servlet-name>sitemesh-freemarker</servlet-name>
 		<servlet-class>com.opensymphony.module.sitemesh.freemarker.FreemarkerDecoratorServlet</servlet-class>
 		<init-param>
@@ -174,14 +175,14 @@
 		<url-pattern>*.eot</url-pattern>
 	</servlet-mapping>
 	<!-- 配置错误页面 -->
-	<!-- <error-page> -->
-	<!-- <error-code>404</error-code> -->
-	<!-- <location>/404</location> -->
-	<!-- </error-page> -->
-	<!-- <error-page> -->
-	<!-- <error-code>500</error-code> -->
-	<!-- <location>/505</location> -->
-	<!-- </error-page> -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/505</location>
+	</error-page>
 	<welcome-file-list>
 		<welcome-file>/</welcome-file>
 	</welcome-file-list>
