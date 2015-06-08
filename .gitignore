@@ -12,3 +12,5 @@ target/
 bin
 *.orig
 .externalToolBuilders
+/target/
+/target/

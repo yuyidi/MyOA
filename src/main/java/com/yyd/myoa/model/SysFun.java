@@ -10,6 +10,8 @@ public class SysFun {
     private Integer displayOrder;
 
     private Integer parentNodeId;
+    
+    private String icon;
 
     public Integer getNodeId() {
         return nodeId;
@@ -50,4 +52,12 @@ public class SysFun {
     public void setParentNodeId(Integer parentNodeId) {
         this.parentNodeId = parentNodeId;
     }
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 }

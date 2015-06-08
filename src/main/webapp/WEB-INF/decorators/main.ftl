@@ -102,6 +102,7 @@
 				Index.initDashboardDaterange();
 				${head}
 				Tasks.initDashboardWidget();
+				
 			});
 		</script>
 		<!-- END JAVASCRIPTS -->

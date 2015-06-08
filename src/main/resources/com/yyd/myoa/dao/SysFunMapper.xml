@@ -7,9 +7,10 @@
     <result column="node_url" property="nodeUrl" jdbcType="VARCHAR" />
     <result column="display_order" property="displayOrder" jdbcType="INTEGER" />
     <result column="parent_node_id" property="parentNodeId" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    node_id, display_name, node_url, display_order, parent_node_id
+    node_id, display_name, node_url, display_order, parent_node_id,icon
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.yyd.myoa.model.SysFun" >
     insert into sys_fun (node_id, display_name, node_url, 
-      display_order, parent_node_id)
+      display_order, parent_node_id,icon)
     values (#{nodeId,jdbcType=INTEGER}, #{displayName,jdbcType=VARCHAR}, #{nodeUrl,jdbcType=VARCHAR}, 
-      #{displayOrder,jdbcType=INTEGER}, #{parentNodeId,jdbcType=INTEGER})
+      #{displayOrder,jdbcType=INTEGER}, #{parentNodeId,jdbcType=INTEGER},#{icon,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yyd.myoa.model.SysFun" >
     insert into sys_fun
@@ -45,6 +46,9 @@
       <if test="parentNodeId != null" >
         parent_node_id,
       </if>
+       <if test="icon != null" >
+        icon,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="nodeId != null" >
@@ -61,6 +65,9 @@
       </if>
       <if test="parentNodeId != null" >
         #{parentNodeId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +86,9 @@
       <if test="parentNodeId != null" >
         parent_node_id = #{parentNodeId,jdbcType=INTEGER},
       </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
     </set>
     where node_id = #{nodeId,jdbcType=INTEGER}
   </update>
@@ -87,7 +97,11 @@
     set display_name = #{displayName,jdbcType=VARCHAR},
       node_url = #{nodeUrl,jdbcType=VARCHAR},
       display_order = #{displayOrder,jdbcType=INTEGER},
-      parent_node_id = #{parentNodeId,jdbcType=INTEGER}
+      parent_node_id = #{parentNodeId,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR}
     where node_id = #{nodeId,jdbcType=INTEGER}
   </update>
+  <select id="find" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/> from sys_fun
+  </select>
 </mapper>

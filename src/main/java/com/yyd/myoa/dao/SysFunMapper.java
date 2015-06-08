@@ -1,5 +1,7 @@
 package com.yyd.myoa.dao;
 
+import java.util.List;
+
 import com.yyd.myoa.model.SysFun;
 
 public interface SysFunMapper {
@@ -14,4 +16,6 @@ public interface SysFunMapper {
     int updateByPrimaryKeySelective(SysFun record);
 
     int updateByPrimaryKey(SysFun record);
+    
+    public List<SysFun> find();
 }

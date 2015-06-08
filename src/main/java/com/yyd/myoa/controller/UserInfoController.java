@@ -17,7 +17,9 @@ import com.yyd.myoa.exception.ValidateException;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.query.UserInfoQuery;
 import com.yyd.myoa.service.Page;
+import com.yyd.myoa.service.SysFunService;
 import com.yyd.myoa.service.UserInfoService;
+import com.yyd.myoa.service.tag.SysFunTag;
 import com.yyd.myoa.utils.HttpUtils;
 
 
@@ -48,7 +50,8 @@ public class UserInfoController extends BaseController {
 	}
 	
 	@RequestMapping(value="/demo",method=RequestMethod.GET)
-	public String demo(){
+	public String demo(ModelMap model){
+//		model.addAttribute("myoa_sysfun_tag", new SysFunTag());
 	    return "demo";
 	}
 	/**

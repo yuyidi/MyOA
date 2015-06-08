@@ -122,6 +122,7 @@
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="login_title" value="MYOA我的办公自动化"></entry>
+				<entry key="myoa_sysfun_tag" value-ref="sysFunTag" />
 			</map>
 		</property>
 	</bean>
