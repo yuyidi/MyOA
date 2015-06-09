@@ -1,6 +1,8 @@
 package com.yyd.myoa.model;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable{
     private String userId;
 
     private String userName;

@@ -1,23 +1,25 @@
 package com.yyd.myoa.service;
 
+import java.io.Serializable;
+
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 
-public class Page<T> {
-	private PageList<T> pageList;
+public class Page<T> implements Serializable{
+	private PageList<T> items;
 	private Paginator paginator;
 	
-	public Page(PageList<T> pageList) {
-		this.pageList = pageList;
-		this.paginator = pageList.getPaginator();
+	public Page(PageList<T> items) {
+		this.items = items;
+		this.paginator = items.getPaginator();
 	}
 
-	public PageList<T> getPageList() {
-		return pageList;
+	public PageList<T> getItems() {
+		return items;
 	}
 
-	public void setPageList(PageList<T> pageList) {
-		this.pageList = pageList;
+	public void setItems(PageList<T> items) {
+		this.items = items;
 	}
 
 	public Paginator getPaginator() {
