@@ -16,7 +16,6 @@ import com.yyd.myoa.dao.LoginLogMapper;
 import com.yyd.myoa.dao.UserInfoMapper;
 import com.yyd.myoa.dao.UserVerifyMapper;
 import com.yyd.myoa.exception.ServiceException;
-import com.yyd.myoa.j2cache.CacheChannel;
 import com.yyd.myoa.model.LoginLog;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.model.UserVerify;
@@ -36,7 +35,7 @@ public class UserInfoService extends BaseService {
 	private LoginLogMapper loginLogMapper;
 	@Resource(name="simpleMail")
 	private Mail mail;
-	CacheChannel cache = CacheChannel.getInstance();
+//	CacheChannel cache = CacheChannel.getInstance();
 	/**
 	 * 
 	* @Title: getUserPassword
@@ -50,15 +49,9 @@ public class UserInfoService extends BaseService {
 	}
 
 	public Page<UserInfo> getUserinfoList(UserInfoQuery query) {
-		Page<UserInfo> page =null;
-		if(cache.get("userinfo", query.getPage()).getValue() == null){
 			PageList<UserInfo> pageList = (PageList<UserInfo>) userInfoMapper
 					.selectByQuery(query, createPageBounds(query));
-			page = new Page<UserInfo>(pageList);
-			cache.set("userinfo", query.getPage(), page);
-		}else{
-			page = (Page<UserInfo>) cache.get("userinfo", query.getPage()).getValue();
-		}
+			Page<UserInfo> page = new Page<UserInfo>(pageList);
 		return page;
 	}
 	

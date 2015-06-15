@@ -1,8 +1,7 @@
 package com.yuyidi.myoa.justest;
 
 import java.util.List;
-
-public class UserService {
+public class UserService{
 	/**
 	 * 
 	* @Title: register

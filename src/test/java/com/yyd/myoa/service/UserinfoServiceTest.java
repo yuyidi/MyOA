@@ -1,8 +1,11 @@
 package com.yyd.myoa.service;
 
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -18,13 +21,19 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
+import com.yuyidi.myoa.justest.User;
+import com.yuyidi.myoa.justest.UserService;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.query.UserInfoQuery;
+import com.yyd.myoa.redis.UserInfoRedis;
 
 
 public class UserinfoServiceTest extends BaseServiceTest{
     @Autowired
 	private UserInfoService userInfoService;
+    
+    @Autowired
+    private UserInfoRedis userInfoRedis;
     
     RestTemplate restTemplate = new RestTemplate();
 	
@@ -58,5 +67,30 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<MultiValueMap<String,Object>>(param,headers);
 	    ResponseEntity<String> responseEntity = rest.exchange(url, HttpMethod.POST, httpEntity, String.class);	    
 	    System.out.println(responseEntity.getBody());
+	}
+	
+	@Test
+	public void testRedis(){
+//		UserInfo userInfo = new UserInfo();
+//		userInfo.setUserId("test12");
+//		userInfo.setUserName("余乙迪");
+//		userInfo.setEmail("243549367@qq.com");
+//		userInfoRedis.jackSet(userInfo);
+//		UserInfo user=userInfoRedis.jackGet();
+//		List<Object> hkeys = new ArrayList<Object>();
+//		hkeys.add("userId");
+//		hkeys.add("userName");
+//		hkeys.add("Email");
+//		UserInfo user=userInfoRedis.getObj(hkeys);
+//		System.out.println(user.getUserId()+","+user.getUserName()+","+user.getEmail());
+		List<String> keys = new ArrayList<String>();
+		keys.add("UserInfo:H:11");
+		keys.add("UserInfo:H:12");
+//		List<UserInfo> userInfos= userInfoRedis.list(keys);
+		List<UserInfo> userInfos =userInfoRedis.listConn(keys);
+		for (int i = 0; i < userInfos.size(); i++) {
+			UserInfo user = userInfos.get(i);
+			System.out.println(user.getUserId()+","+user.getUserName()+","+user.getEmail());
+		}
 	}
 }

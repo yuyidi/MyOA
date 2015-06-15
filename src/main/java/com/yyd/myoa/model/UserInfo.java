@@ -30,8 +30,32 @@ public class UserInfo implements Serializable{
     public String getUserId() {
         return userId;
     }
+    
+    public UserInfo() {
+	}
 
-    public void setUserId(String userId) {
+    public UserInfo(String userId, String userName, String password,
+			String email, Integer departId, Integer gender, Integer roleId,
+			Integer userState, Integer ifDeleteUser, String userPricter,
+			String actiCode, String actiCodeName) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.departId = departId;
+		this.gender = gender;
+		this.roleId = roleId;
+		this.userState = userState;
+		this.ifDeleteUser = ifDeleteUser;
+		this.userPricter = userPricter;
+		this.actiCode = actiCode;
+		this.actiCodeName = actiCodeName;
+	}
+
+
+
+	public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
     }
 

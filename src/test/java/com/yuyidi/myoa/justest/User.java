@@ -1,10 +1,15 @@
 package com.yuyidi.myoa.justest;
 
-public class User{
+import java.io.Serializable;
+
+public class User implements Serializable{
 	 private Integer id;
 	 private Integer pid;
 	 private String name;
-	 
+
+	 public User() {
+		 super();
+	}
 
 	public Integer getId() {
 		return id;
