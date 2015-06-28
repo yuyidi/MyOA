@@ -1,5 +1,6 @@
 package com.yyd.myoa.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import com.yyd.myoa.model.LoginLog;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.model.UserVerify;
 import com.yyd.myoa.query.UserInfoQuery;
+import com.yyd.myoa.utils.HttpUtils;
 import com.yyd.myoa.utils.Mail;
 import com.yyd.myoa.utils.MyUtils;
 
@@ -35,7 +37,6 @@ public class UserInfoService extends BaseService {
 	private LoginLogMapper loginLogMapper;
 	@Resource(name="simpleMail")
 	private Mail mail;
-//	CacheChannel cache = CacheChannel.getInstance();
 	/**
 	 * 
 	* @Title: getUserPassword
@@ -124,5 +125,10 @@ public class UserInfoService extends BaseService {
 	 */
 	public void loginLog(LoginLog log){
 		loginLogMapper.insert(log);
+	}
+	
+	public void addTest(){
+	    loginLogMapper.insert(new LoginLog("yuyidi",new Date(),1,"127.0.0.1","test"));
+	    throw new ServiceException(ServiceException.USER_LOGIN_ERROR);
 	}
 }

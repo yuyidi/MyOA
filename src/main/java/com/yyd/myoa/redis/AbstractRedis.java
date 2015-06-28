@@ -1,11 +1,9 @@
 package com.yyd.myoa.redis;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,13 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.hash.BeanUtilsHashMapper;
-import org.springframework.data.redis.hash.DecoratingStringHashMapper;
-import org.springframework.data.redis.hash.HashMapper;
 import org.springframework.data.redis.hash.JacksonHashMapper;
-import org.springframework.util.LinkedMultiValueMap;
-
-import com.yyd.myoa.model.UserInfo;
 
 public abstract class AbstractRedis<E, K, V> {
 	@Resource

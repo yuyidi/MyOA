@@ -13,5 +13,6 @@ public class ServiceExceptionMap {
     
     static{
         exceptionMap.put(ServiceException.USER_REGISTER_ERROR, "用户注册错误");
+        exceptionMap.put(ServiceException.USER_LOGIN_ERROR, "用户登录失败");
     }
 }

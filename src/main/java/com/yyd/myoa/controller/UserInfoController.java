@@ -52,8 +52,8 @@ public class UserInfoController extends BaseController {
 	}
 	
 	@RequestMapping(value="/demo",method=RequestMethod.GET)
-	public String demo(ModelMap model){
-//		model.addAttribute("myoa_sysfun_tag", new SysFunTag());
+	public String demo(ModelMap model) throws ServiceException{
+	    userInfoService.addTest();
 	    return "demo";
 	}
 	/**

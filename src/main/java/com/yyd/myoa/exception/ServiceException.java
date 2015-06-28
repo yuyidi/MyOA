@@ -1,10 +1,11 @@
 package com.yyd.myoa.exception;
 
-public class ServiceException extends Exception {
+public class ServiceException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
     
     public static final String USER_REGISTER_ERROR="002";
+    public static final String USER_LOGIN_ERROR="003";
     
     private String type;
     
