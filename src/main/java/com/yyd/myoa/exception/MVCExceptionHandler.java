@@ -34,28 +34,28 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
             if(ex instanceof ValidateException){
             	ValidateException ve = (ValidateException) ex;
                 message = ve.showMsg();
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setStatus(HttpServletResponse.SC_OK);
             }
             //业务层异常处理
             if(ex instanceof ServiceException){
                 ServiceException se = (ServiceException) ex;
                 message = se.showMsg();
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setStatus(HttpServletResponse.SC_OK);
             }
             //权限，未知账户异常
             if(ex instanceof UnknownAccountException){
                 message = ex.getMessage();
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setStatus(HttpServletResponse.SC_OK);
             }
             //权限，密码错误异常
             if(ex instanceof IncorrectCredentialsException){
                 message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setStatus(HttpServletResponse.SC_OK);
             }
             //权限，账户已锁定异常
             if(ex instanceof LockedAccountException){
                 message = SystemConstant.LOCKED_ACCOUNT_EXCEPTION;
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setStatus(HttpServletResponse.SC_OK);
             }
             //授权异常，一般都是登录成功后就会被授权，所以此授权异常不起作用
 //            if(ex instanceof AuthenticationException){
