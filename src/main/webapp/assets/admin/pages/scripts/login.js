@@ -54,7 +54,7 @@ var Login = function() {
             		 type:form.method,
             		 dataType:'json',
             		 success:function(data){
-            			 window.location.href=data.success;
+            			 window.location.href="index";
             		 },error: function(XMLHttpRequest, textStatus, errorThrown) {
             			 $("#login_error").html(XMLHttpRequest.responseJSON.result);
             			 $('.alert-danger', $('.login-form')).show();

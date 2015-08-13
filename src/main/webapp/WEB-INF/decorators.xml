@@ -8,7 +8,7 @@
     </excludes>
 
     <!-- 用来定义装饰器要过滤的页面 -->
-    <decorator name="main" page="main.ftl">
+    <decorator name="main" page="main.jsp">
     	<pattern>/*</pattern>
     </decorator>
 </decorators>

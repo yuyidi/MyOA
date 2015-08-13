@@ -1,10 +1,14 @@
 package com.yyd.myoa.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,7 +57,7 @@ public class UserInfoController extends BaseController {
 	
 	@RequestMapping(value="/demo",method=RequestMethod.GET)
 	public String demo(ModelMap model) throws ServiceException{
-	    userInfoService.addTest();
+//	    userInfoService.addTest();
 	    return "demo";
 	}
 	/**
@@ -84,5 +88,27 @@ public class UserInfoController extends BaseController {
 	public String verify(@RequestParam("random") String random,@RequestParam("userActiCode") String userActiCode) throws ServiceException{
 		userInfoService.verify(random, userActiCode);
 		return "redirect:/login";
+	}
+	
+	@RequestMapping("/session")
+	public void session(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		//获取session  如果是第一次请求，则等同于 request.getSession(true); 如果是已经存在，则获取session
+		HttpSession session = request.getSession();
+		if(session.isNew()){
+			session.setAttribute("name", "余乙迪");
+		}
+		//获取session
+		String sessionID = session.getId();
+		PrintWriter out = response.getWriter();
+		if(session.isNew()){
+			out.println("Hello,HttpSession! <br>The first response - SeesionId="
+                    + sessionID + " <br>");
+		}else{
+			out.println("Hello,HttpSession! <br>The second response - SeesionId="	
+                    + sessionID + " <br>");
+            // 从Session获取属性值
+            out.println("The second-response - name: "
+                    + session.getAttribute("name"));
+		}
 	}
 }

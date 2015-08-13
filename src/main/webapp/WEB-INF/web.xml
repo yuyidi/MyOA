@@ -186,4 +186,11 @@
 	<welcome-file-list>
 		<welcome-file>/</welcome-file>
 	</welcome-file-list>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/sysfun</taglib-uri>
+			<taglib-location>/WEB-INF/SysFun.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>
