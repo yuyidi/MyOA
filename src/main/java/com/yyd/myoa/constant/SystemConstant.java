@@ -17,8 +17,4 @@ public class SystemConstant {
     public static final String LOCKED_ACCOUNT_EXCEPTION = "账号已被锁定，请与系统管理员联系!";
     public static final String AUTHENTICATION_EXCEPTION = "您没有授权!";
     
-    
-    public static ShiroUser getShiroUser(Subject subject){
-        return (ShiroUser) subject.getPrincipals();
-    }
 }
