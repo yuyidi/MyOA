@@ -62,7 +62,7 @@
     <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  
         p:host-name="${redis.host}" p:port="${redis.port}" p:use-pool="true"/>  
       
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"  p:connection-factory-ref="connectionFactory" >  
+    <bean id="redisTemplate" class="com.yyd.myoa.redis.OriRedisTemplate"  p:connection-factory-ref="connectionFactory" >  
     	 <property name="KeySerializer">  
           <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>  
       </property>  
@@ -73,7 +73,7 @@
 			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
 		</property>
 <!-- 		 <property name="hashValueSerializer"> -->
-<!-- 			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" /> -->
+<!-- 			<bean class="org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer" /> -->
 <!-- 		</property> -->
     </bean>      
 </beans>

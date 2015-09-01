@@ -71,26 +71,27 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	
 	@Test
 	public void testRedis(){
-//		UserInfo userInfo = new UserInfo();
-//		userInfo.setUserId("test12");
-//		userInfo.setUserName("余乙迪");
-//		userInfo.setEmail("243549367@qq.com");
-//		userInfoRedis.jackSet(userInfo);
-//		UserInfo user=userInfoRedis.jackGet();
-//		List<Object> hkeys = new ArrayList<Object>();
-//		hkeys.add("userId");
-//		hkeys.add("userName");
-//		hkeys.add("Email");
-//		UserInfo user=userInfoRedis.getObj(hkeys);
-//		System.out.println(user.getUserId()+","+user.getUserName()+","+user.getEmail());
 		List<String> keys = new ArrayList<String>();
-		keys.add("UserInfo:H:11");
-		keys.add("UserInfo:H:12");
-//		List<UserInfo> userInfos= userInfoRedis.list(keys);
-		List<UserInfo> userInfos =userInfoRedis.listConn(keys);
-		for (int i = 0; i < userInfos.size(); i++) {
-			UserInfo user = userInfos.get(i);
-			System.out.println(user.getUserId()+","+user.getUserName()+","+user.getEmail());
-		}
+		keys.add("1");
+		keys.add("2");
+		keys.add("3");
+		List<UserInfo> userInfos= userInfoRedis.listConn(keys);
+//		List<UserInfo> userInfos =userInfoRedis.listPipe(keys);
+		createJSONResult(userInfos);
+	}
+	
+	public void save(){
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserId("test3");
+		userInfo.setUserName("余乙迪");
+		userInfo.setEmail("243549367@qq.com");
+		userInfoRedis.save(userInfo);
+	}
+	
+	@Test
+	public void get(){
+		UserInfo user=userInfoRedis.get("3");
+		System.out.println(user.getUserId());
+		createJSONResult(user);
 	}
 }
