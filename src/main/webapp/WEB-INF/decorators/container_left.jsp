@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib uri="/sysfun" prefix="sysfun"%>
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
 	<div class="page-sidebar navbar-collapse collapse">
@@ -34,7 +33,39 @@
 					</div>
 				</form> <!-- END RESPONSIVE QUICK SEARCH FORM -->
 			</li> 
-			<sysfun:sysfun sysfun="${sysfun}"/>	
+<%-- 			<sysfun:sysfun sysfun="${sysfun}"/>	 --%>
+		<c:forEach items="${sysfun}" var="sysfun" varStatus="status">
+			<c:choose>
+				<c:when test="${status.first}">
+					<li class="start active open">
+				</c:when>
+				<c:otherwise>
+					<li class="start  open">
+				</c:otherwise>
+			</c:choose>
+				<a href="javascript:;">
+					<i class="${sysfun.icon}"></i>
+					<span class="title">${sysfun.displayName}</span>
+					<span class="selected"></span>
+					<span class="arrow open"></span>
+				</a>
+				<ul class="sub-menu">
+					<c:forEach items="${sysfun.childs}" var="childs" varStatus="childstatus">
+						<c:choose>
+							<c:when test="${childstatus.first}">
+								<li class="active">
+							</c:when>
+							<c:otherwise>
+								<li class="">
+							</c:otherwise>
+						</c:choose>
+						<a href="${childs.nodeUrl}">
+							<i class="${childs.icon}"></i>${childs.displayName}</a>
+						</li>
+					</c:forEach>
+				</ul>
+			</li>
+		</c:forEach>	
 		</ul>
 		<!-- END SIDEBAR MENU -->
 	</div>

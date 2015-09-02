@@ -24,21 +24,20 @@ public class SysFunService {
 	* @return List<Menu>
 	* @throws
 	 */
-	public List<Menu> select(){
+	public List<SysFun> select(){
 		List<SysFun> lists = sysFunMapper.find();
-		Map<Integer, Menu> map = new HashMap<Integer, Menu>();
-		List<Menu> listshow = new ArrayList<Menu>();
-		for (SysFun sysFun : lists) {
-			if(sysFun.getNodeId().equals(sysFun.getParentNodeId())){
-				Menu menu = new Menu(sysFun.getNodeId(),sysFun.getDisplayName(),sysFun.getIcon());
-				map.put(sysFun.getNodeId(), menu);
-				listshow.add(menu);
-			}else{
-				if(map.get(sysFun.getParentNodeId()) != null){
-					map.get(sysFun.getParentNodeId()).getChilds().add(sysFun);
-				}
+		return  menu(lists, 0);
+	}
+	
+	public List<SysFun> menu(List<SysFun> menus,Integer pid){
+		List<SysFun> result = new ArrayList<SysFun>();
+		for (SysFun sysFun : menus) {
+			if(sysFun.getParentNodeId().equals(pid)){
+				List<SysFun> childs = menu(menus,sysFun.getNodeId());
+				sysFun.setChilds(childs);
+				result.add(sysFun);
 			}
 		}
-		return  listshow;
+		return result;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.yyd.myoa.dto.Menu;
+import com.yyd.myoa.model.SysFun;
 
 public class SysFunServiceTest extends BaseServiceTest {
 	
@@ -14,7 +14,7 @@ public class SysFunServiceTest extends BaseServiceTest {
 	
 	@Test
 	public void select(){
-		List<Menu> shows = sysFunService.select();
+		List<SysFun> shows = sysFunService.select();
 		createJSONResult(shows);
 	}
 }

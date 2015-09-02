@@ -9,8 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
-import com.yyd.myoa.dto.Menu;
+import com.yyd.myoa.model.SysFun;
 import com.yyd.myoa.service.SysFunService;
 
 import freemarker.core.Environment;
@@ -27,7 +26,7 @@ public class SysFunTag implements TemplateDirectiveModel {
 	@Override
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
-		List<Menu> menu = sysFunSerice.select();
+		List<SysFun> menu = sysFunSerice.select();
 		env.setVariable("tag_sysfun_list",DEFAULT_WRAPPER.wrap(menu));
 		body.render(env.getOut());
 	}

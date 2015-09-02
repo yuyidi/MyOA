@@ -33,6 +33,7 @@ public class SystemController extends BaseController {
         token.setPassword(password.toCharArray());
         token.setRememberMe(true);
         subject.login(token);
+        model.addAttribute("sysfun", sysFunSerice.select());
         model.addAttribute("success", "/index");
     }
 
@@ -57,7 +58,6 @@ public class SystemController extends BaseController {
 
     @RequestMapping(value = "/index")
     public ModelAndView index(ModelMap model) {
-        model.addAttribute("sysfun", sysFunSerice.select());
         return new ModelAndView("index");
     }
 }

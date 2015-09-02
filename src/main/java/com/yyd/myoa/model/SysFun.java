@@ -1,5 +1,8 @@
 package com.yyd.myoa.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SysFun {
     private Integer nodeId;
 
@@ -12,7 +15,8 @@ public class SysFun {
     private Integer parentNodeId;
     
     private String icon;
-
+    
+    private List<SysFun> childs = new ArrayList<SysFun>();
     public Integer getNodeId() {
         return nodeId;
     }
@@ -59,5 +63,13 @@ public class SysFun {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public List<SysFun> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<SysFun> childs) {
+		this.childs = childs;
 	}
 }

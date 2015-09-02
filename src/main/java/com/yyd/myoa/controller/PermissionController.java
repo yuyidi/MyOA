@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.yyd.myoa.dto.Menu;
+import com.yyd.myoa.model.SysFun;
 import com.yyd.myoa.service.SysFunService;
 
 /**
@@ -24,7 +24,7 @@ public class PermissionController extends BaseController{
 	private SysFunService sysFunService;
 	@RequestMapping("/menu")
 	private void menu(ModelMap model){
-		List<Menu> menu = sysFunService.select();
+		List<SysFun> menu = sysFunService.select();
 		creatJSONResult(model, menu);
 	}
 }
