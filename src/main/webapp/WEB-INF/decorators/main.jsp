@@ -165,14 +165,21 @@
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 		jQuery(document).ready(function() {
+			if(localStorage.click!=null){
+				$(".sub-menu").css("display","none");
+				$(".sub-menu>li").removeClass("active");
+				$($(".sub-menu>li")[localStorage.click]).addClass("active").parent().css("display","block");
+			}
 			Metronic.init(); // init metronic core componets
 			Layout.init(); // init layout
 			QuickSidebar.init(); // init quick sidebar
 			Demo.init(); // init demo features 
 			Index.init();
 			Index.initDashboardDaterange();
-			
 			Tasks.initDashboardWidget();
+			$(".sub-menu>li").on("click",function(){
+				localStorage.click=$(".sub-menu>li").index($(this));
+			});
 		});
 	</script>
 	<decorator:head />

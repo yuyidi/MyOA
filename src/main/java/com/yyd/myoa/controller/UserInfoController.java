@@ -46,18 +46,18 @@ public class UserInfoController extends BaseController {
 		}
 		query.setPage(page);
 	    Page<UserInfo> userInfos=  userInfoService.getUserinfoList(query);
-	    model.put("result", userInfos);
+	    creatJSONResult(model, userInfos);
 	}
 	
 	@RequestMapping(value="/demo",method=RequestMethod.POST)
-	public String demo(@RequestParam("name")String demo){
+	public String demo(@RequestParam(value="name",required=false)String demo){
 		System.out.println(demo);
 	    return "demo";
 	}
 	
 	@RequestMapping(value="/demo",method=RequestMethod.GET)
 	public String demo(ModelMap model) throws ServiceException{
-//	    userInfoService.addTest();
+		model.addAttribute("status","ok");
 	    return "demo";
 	}
 	/**
@@ -71,8 +71,8 @@ public class UserInfoController extends BaseController {
 	public String register(UserInfo userInfo,ModelMap model,HttpServletRequest request) throws ServiceException{
 		String result = userInfoService.registerUser(userInfo,HttpUtils.getBasePath(request));
 		Map<String, String> map = new HashMap<String, String>();
-		log.debug(result);
 		map.put("message", result);
+		log.debug(result);
 		return "redirect:/login";
 	}
 	

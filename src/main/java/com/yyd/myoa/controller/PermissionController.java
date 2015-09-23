@@ -22,9 +22,9 @@ import com.yyd.myoa.service.SysFunService;
 public class PermissionController extends BaseController{
 	@Autowired
 	private SysFunService sysFunService;
-	@RequestMapping("/menu")
-	private void menu(ModelMap model){
-		List<SysFun> menu = sysFunService.select();
-		creatJSONResult(model, menu);
-	}
+//	@RequestMapping("/menu")
+//	private void menu(ModelMap model){
+//		List<SysFun> menu = sysFunService.select();
+//		creatJSONResult(model, menu);
+//	}
 }

@@ -53,20 +53,21 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	}
 	@Test
 	public void restTemplate(){
-		String url = "http://127.0.0.1:8081/myoa/user-info/demo.json";
+		String url = "http://127.0.0.1:8080/user-info/demo.json";
 		RestTemplate rest = new RestTemplate();
-	    MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+	    MultiValueMap<String, String> param = new LinkedMultiValueMap<String,String>();
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("status", "true");
 	    HttpHeaders headers = new HttpHeaders();
         // 为了避免RestTemplate默认的ISO-8859-1编码，这里用UTF-8编码设一下
-        headers.setContentType(new MediaType("text", "plain", Charset.forName("UTF-8")));
-	    param.add("name",JSON.toJSONString(map));
-//	    param.add("name","demo"); //如果是json数据的话  就需要添加一个httpentity header
+//        headers.setContentType(new MediaType("text", "plain", Charset.forName("UTF-8")));
+//	    param.add("name",JSON.toJSONString(map));
+	    param.add("name","demo"); //如果是json数据的话  就需要添加一个httpentity header
 //	    String string = rest.postForObject(url, param, String.class);
-	    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<MultiValueMap<String,Object>>(param,headers);
+	    HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String,String>>(param,headers);
 	    ResponseEntity<String> responseEntity = rest.exchange(url, HttpMethod.POST, httpEntity, String.class);	    
 	    System.out.println(responseEntity.getBody());
+//	    System.out.println(string);
 	}
 	
 	@Test

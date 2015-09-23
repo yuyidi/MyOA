@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
 	<div class="page-sidebar navbar-collapse collapse">
@@ -10,7 +10,7 @@
 		<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
 		<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 		<ul class="page-sidebar-menu" data-keep-expanded="false"
-			data-auto-scroll="true" data-slide-speed="200">
+			data-auto-scroll="false" data-slide-speed="200">
 			<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
 			<li class="sidebar-toggler-wrapper">
 				<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -28,29 +28,26 @@
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn"> <a href="javascript:;"
 							class="btn submit"><i class="icon-magnifier"></i></a>
-
 						</span>
 					</div>
 				</form> <!-- END RESPONSIVE QUICK SEARCH FORM -->
-			</li> 
-<%-- 			<sysfun:sysfun sysfun="${sysfun}"/>	 --%>
-		<c:forEach items="${sysfun}" var="sysfun" varStatus="status">
-			<c:choose>
-				<c:when test="${status.first}">
-					<li class="start active open">
-				</c:when>
-				<c:otherwise>
-					<li class="start  open">
-				</c:otherwise>
-			</c:choose>
-				<a href="javascript:;">
-					<i class="${sysfun.icon}"></i>
-					<span class="title">${sysfun.displayName}</span>
-					<span class="selected"></span>
+			</li>
+			<c:forEach items="${sysfun}" var="sysfun" varStatus="status">
+				<c:choose>
+					<c:when test="${status.first}">
+						<li class="start active open">
+					</c:when>
+					<c:otherwise>
+						<li class="start  open">
+					</c:otherwise>
+				</c:choose>
+				<a href="javascript:;"> <i class="${sysfun.icon}"></i> <span
+					class="title">${sysfun.displayName}</span> <span class="selected"></span>
 					<span class="arrow open"></span>
 				</a>
 				<ul class="sub-menu">
-					<c:forEach items="${sysfun.childs}" var="childs" varStatus="childstatus">
+					<c:forEach items="${sysfun.childs}" var="childs"
+						varStatus="childstatus">
 						<c:choose>
 							<c:when test="${childstatus.first}">
 								<li class="active">
@@ -59,13 +56,12 @@
 								<li class="">
 							</c:otherwise>
 						</c:choose>
-						<a href="${childs.nodeUrl}">
-							<i class="${childs.icon}"></i>${childs.displayName}</a>
+						<a href="${childs.nodeUrl}"> <i class="${childs.icon}"></i>${childs.displayName}</a>
 						</li>
 					</c:forEach>
 				</ul>
-			</li>
-		</c:forEach>	
+				</li>
+			</c:forEach>
 		</ul>
 		<!-- END SIDEBAR MENU -->
 	</div>

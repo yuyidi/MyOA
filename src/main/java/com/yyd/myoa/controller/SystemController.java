@@ -1,5 +1,7 @@
 package com.yyd.myoa.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -26,14 +28,14 @@ public class SystemController extends BaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestParam("userId") String userId, @RequestParam("password") String password,
-            ModelMap model) {
+            ModelMap model,HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken();
         token.setUsername(userId);
         token.setPassword(password.toCharArray());
         token.setRememberMe(true);
         subject.login(token);
-        model.addAttribute("sysfun", sysFunSerice.select());
+        request.getSession().setAttribute("sysfun", sysFunSerice.select());
         model.addAttribute("success", "/index");
     }
 
