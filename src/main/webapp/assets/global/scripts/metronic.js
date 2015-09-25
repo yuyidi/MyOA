@@ -2,16 +2,15 @@
 Core script to handle the entire theme and core functions
 **/
 var Metronic = function() {
-
+	var base = document.getElementById("base").href;
     // IE mode
     var isRTL = false;
     var isIE8 = false;
     var isIE9 = false;
     var isIE10 = false;
-
     var resizeHandlers = [];
 
-    var assetsPath = '../../assets/';
+    var assetsPath = base+'/assets/';
 
     var globalImgPath = 'global/img/';
 
@@ -464,7 +463,6 @@ var Metronic = function() {
             handlePopovers(); // handles bootstrap popovers
             handleAccordions(); //handles accordions 
             handleModals(); // handle modals
-
             // Hacks
             handleFixInputPlaceholderForIE(); //IE8 & IE9 input placeholder issue fix
         },
@@ -862,6 +860,33 @@ var Metronic = function() {
             } else {
                 return '';
             }
+        },
+        ajaxGet:function(url,datas,callback){
+        	$.ajax({
+        		url:url,
+        		type:'get',
+        		dataType:'json',
+        		data:datas,
+        		success:callback,
+        		error: function(XMLHttpRequest, textStatus, errorThrown) {
+       			 	console.log(XMLHttpRequest.responseJSON.result);
+        		}	
+        	});
+        },
+        ajaxPost:function(url,datas,callback){
+        	$.ajax({
+        		url:url,
+        		type:'post',
+        		dataType:'json',
+        		data:datas,
+        		success:callback,
+        		error: function(XMLHttpRequest, textStatus, errorThrown) {
+       			 	console.log(XMLHttpRequest.responseJSON.result);
+        		}	
+        	});
+        },
+        context:function(){
+        	return base;
         }
     };
 

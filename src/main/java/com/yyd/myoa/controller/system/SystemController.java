@@ -1,4 +1,6 @@
-package com.yyd.myoa.controller;
+package com.yyd.myoa.controller.system;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yyd.myoa.controller.BaseController;
+import com.yyd.myoa.model.MeetingInfo;
 import com.yyd.myoa.service.SysFunService;
 
 
@@ -24,7 +28,7 @@ public class SystemController extends BaseController {
     public String login() {
         return "login";
     }
-
+    
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestParam("userId") String userId, @RequestParam("password") String password,
@@ -36,15 +40,27 @@ public class SystemController extends BaseController {
         token.setRememberMe(true);
         subject.login(token);
         request.getSession().setAttribute("sysfun", sysFunSerice.select());
+        subject.getPrincipal();
         model.addAttribute("success", "/index");
     }
 
+    /**
+     * 
+    * @Title: mettingInfos
+    * @Description:会议信息
+    * @return List<MeetingInfo>
+    * @throws
+     */
+    @RequestMapping("/meeting")
+    public void mettingInfos(ModelMap model){
+    	List<MeetingInfo> mettinginfos = sysFunSerice.meetinginfos();
+    	creatJSONResult(model, mettinginfos);
+    }
 
     @RequestMapping(value = "/400")
     public ModelAndView badRequest() {
         return new ModelAndView("400");
     }
-
 
     @RequestMapping(value = "/500")
     public ModelAndView serverError() {

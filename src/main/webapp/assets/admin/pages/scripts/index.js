@@ -40,7 +40,6 @@ var Index = function () {
                     selectedRegion: null,
                     showTooltip: true,
                     onLabelShow: function (event, label, code) {
-
                     },
                     onRegionOver: function (event, code) {
                         if (code == 'ca') {
@@ -48,8 +47,8 @@ var Index = function () {
                         }
                     },
                     onRegionClick: function (element, code, region) {
-                        var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
-                        alert(message);
+//                        var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
+//                        alert(message);
                     }
                 };
 
@@ -92,7 +91,7 @@ var Index = function () {
             $('#region_statistics_loading').hide();
             $('#region_statistics_content').show();
         },
-
+        //日期
         initCalendar: function () {
             if (!jQuery().fullCalendar) {
                 return;
@@ -178,7 +177,7 @@ var Index = function () {
                 }]
             });
         },
-
+        //折线图
         initCharts: function () {
             if (!jQuery.plot) {
                 return;
@@ -419,7 +418,7 @@ var Index = function () {
                 });
             }
         },
-
+        // 控制面板 小统计窗口
         initMiniCharts: function () {
             if (!jQuery().easyPieChart || !jQuery().sparkline) {
                 return;
@@ -503,7 +502,7 @@ var Index = function () {
             });
 
         },
-
+        //控制面板 聊天窗口
         initChat: function () {
 
             var cont = $('#chats');
@@ -569,13 +568,13 @@ var Index = function () {
                 }
             });
         },
-
+        //控制面板 日期区间
         initDashboardDaterange: function () {
 
             if (!jQuery().daterangepicker) {
                 return;
             }
-
+            
             $('#dashboard-report-range').daterangepicker({
                     opens: (Metronic.isRTL() ? 'right' : 'left'),
                     startDate: moment().subtract('days', 29),
@@ -621,8 +620,80 @@ var Index = function () {
 
             $('#dashboard-report-range span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
             $('#dashboard-report-range').show();
+        },
+        meetingtype:function(){
+        	Metronic.ajaxGet(Metronic.context()+"/meeting.json",null,function(data){
+        		var result ="";	
+    			$.each(data.result,function(i,n){
+    				result += '<label class="meetinginfo"><div class="checker"><span><input type="checkbox"></span></div>'+n.meetingName+'</label>';
+    			});
+    			$(".actions>.meeting>.meeting-menu").append(result);
+    			$(".meetinginfo",".meeting-menu").on("click",function(){
+    				if($('.checker',$(this)).children('span').hasClass("checked")){
+    					$('.checker',$(this)).children('span').removeClass("checked");
+    				}else{
+    					$('.checker',$(this)).children('span').addClass("checked");
+    				}
+    			});
+    		});
+        },
+        meetings:function(){
+        	var datas ='<li><div class="col1">'
+						+'<div class="cont">'
+							+'<div class="cont-col1">'
+								+'<div class="label label-sm label-info"><i class="fa fa-bullhorn"></i></div>'
+							+'</div>'
+							+'<div class="cont-col2">'
+								+'<div class="desc">You have 4 pending tasks. <a href="#"><span class="label label-sm label-default ">Take action <i class="fa fa-share"></i></span></a></div>'
+							+'</div>'
+						+'</div>'
+					+'</div>'
+					+'<div class="col2">'
+						+'<div class="date">Just now</div>'
+					+'</div></li>';
+		        	var result = "";
+		        	for (var int = 0; int < 15; int++) {
+						result +=datas; 
+					}
+		        	$(".meetings").append(result);
+        },
+        tasks:function(){
+        	var datas = '<li class="taskinfo"><div class="task-checkbox">'
+								+'<div class="checker"><span><input type="hidden" value="1" name="test" />'
+								+'<input type="checkbox" class="liChild" value="2" name="test" /></span></div>'
+							+'</div>'
+							+'<div class="task-title">'
+								+'<span class="task-title-sp">Present 2013 Year IPO Statistics at Board Meeting </span>'
+								+'<span class="label label-sm label-success">Company</span>'
+								+'<span class="task-bell"><i class="fa fa-bell-o"></i></span>'
+							+'</div>'
+							+'<div class="task-config">'
+								+'<div class="task-config-btn btn-group">'
+									+'<a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">'
+										+'<i class="fa fa-cog"></i><i class="fa fa-angle-down"></i>'
+									+'</a>'
+									+'<ul class="dropdown-menu pull-right">'
+										+'<li><a href="#"><i class="fa fa-check"></i> Complete </a></li>'
+										+'<li><a href="#"><i class="fa fa-pencil"></i> Edit </a></li>'
+										+'<li><a href="#"><i class="fa fa-trash-o"></i> Cancel </a></li>'
+									+'</ul>'
+								+'</div>'
+							+'</div></li>';
+        				var result = "";
+			        	for (var int = 0; int < 15; int++) {
+							result +=datas; 
+						}
+			        	$(".tasks").append(result);
+			        	$(".taskinfo",".tasks").on("click",function(){
+		    				if($('.checker',$(this)).children('span').hasClass("checked")){
+		    					$('.checker',$(this)).children('span').removeClass("checked");
+		    					$(this).removeClass("task-done");
+		    				}else{
+		    					$('.checker',$(this)).children('span').addClass("checked");
+		    					$(this).addClass("task-done");
+		    				}
+		    			});
         }
-
     };
 
 }();

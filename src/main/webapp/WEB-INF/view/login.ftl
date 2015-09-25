@@ -1,3 +1,4 @@
+<#assign base=rc.contextPath />
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -7,6 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
+<base id="base" href="${base}">
 <title>${login_title}</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -15,20 +17,20 @@
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>-->
-<link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="../../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES -->
-<link href="../../assets/admin/pages/css/login2.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/admin/pages/css/login2.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME STYLES -->
-<link href="../../assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="../../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="../../assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link href="../../assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="../../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="${base}/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
 </head>
@@ -42,14 +44,14 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<a href="/index">
-	<img src="../../assets/admin/layout/img/logo-big-white.png" style="height: 17px;" alt=""/>
+	<img src="${base}/assets/admin/layout/img/logo-big-white.png" style="height: 17px;" alt=""/>
 	</a>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="${rc.contextPath}/login.json" method="post">
+	<form class="login-form" action="${base}/login.json" method="post">
 		<div class="form-title">
 			<span class="form-title">欢迎.</span>
 			<span class="form-subtitle">请登录.</span>
@@ -119,7 +121,7 @@
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
 	<!-- BEGIN REGISTRATION FORM -->
-	<form class="register-form" action="${rc.contextPath}/user-info/register" method="post">
+	<form class="register-form" action="${base}/user-info/register" method="post">
 		<div class="form-title">
 			<span class="form-title">注 册</span>
 		</div>
@@ -175,31 +177,31 @@
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
-<script src="../../assets/global/plugins/respond.min.js"></script>
-<script src="../../assets/global/plugins/excanvas.min.js"></script> 
+<script src="${base}/assets/global/plugins/respond.min.js"></script>
+<script src="${base}/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="../../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="${base}/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="../../assets/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="../../assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
-<script src="../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
-<script src="../../assets/admin/pages/scripts/login.js" type="text/javascript"></script>
+<script src="${base}/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="${base}/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="${base}/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="${base}/assets/admin/pages/scripts/login.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
-	Metronic.init(); // init metronic core components
+	Metronic.init("${base}"); // init metronic core components
 	Layout.init(); // init current layout
 	Login.init();
-	Demo.init();
+	Theme.init();
 });
 </script>
 <!-- END JAVASCRIPTS -->

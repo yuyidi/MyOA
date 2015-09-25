@@ -56,7 +56,7 @@
 								<li class="">
 							</c:otherwise>
 						</c:choose>
-						<a href="${childs.nodeUrl}"> <i class="${childs.icon}"></i>${childs.displayName}</a>
+						<a href="${rc.contextPath }${childs.nodeUrl}"> <i class="${childs.icon}"></i>${childs.displayName}</a>
 						</li>
 					</c:forEach>
 				</ul>

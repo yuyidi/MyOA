@@ -8,14 +8,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yyd.myoa.dao.MeetingInfoMapper;
 import com.yyd.myoa.dao.SysFunMapper;
 import com.yyd.myoa.dto.Menu;
+import com.yyd.myoa.model.MeetingInfo;
 import com.yyd.myoa.model.SysFun;
 
 @Service
 public class SysFunService {
 	@Autowired
 	private SysFunMapper sysFunMapper;
+	@Autowired
+	private MeetingInfoMapper meetingInfoMapper;
 	
 	/**
 	 * 
@@ -39,5 +43,10 @@ public class SysFunService {
 			}
 		}
 		return result;
+	}
+	
+	public List<MeetingInfo> meetinginfos(){
+		List<MeetingInfo> mettinginfos = meetingInfoMapper.select();
+		return mettinginfos;
 	}
 }

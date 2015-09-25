@@ -3,7 +3,7 @@ package com.yyd.myoa.model;
 public class MeetingInfo {
     private Integer meetingId;
 
-    private String mettingName;
+    private String meetingName;
 
     public Integer getMeetingId() {
         return meetingId;
@@ -13,11 +13,11 @@ public class MeetingInfo {
         this.meetingId = meetingId;
     }
 
-    public String getMettingName() {
-        return mettingName;
+    public String getMeetingName() {
+        return meetingName;
     }
 
-    public void setMettingName(String mettingName) {
-        this.mettingName = mettingName == null ? null : mettingName.trim();
+    public void setMeetingName(String meetingName) {
+        this.meetingName = meetingName == null ? null : meetingName.trim();
     }
 }

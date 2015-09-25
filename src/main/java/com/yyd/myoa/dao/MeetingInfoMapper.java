@@ -1,5 +1,7 @@
 package com.yyd.myoa.dao;
 
+import java.util.List;
+
 import com.yyd.myoa.model.MeetingInfo;
 
 public interface MeetingInfoMapper {
@@ -14,4 +16,6 @@ public interface MeetingInfoMapper {
     int updateByPrimaryKeySelective(MeetingInfo record);
 
     int updateByPrimaryKey(MeetingInfo record);
+
+	List<MeetingInfo> select();
 }

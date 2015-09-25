@@ -1,9 +1,8 @@
-package com.yyd.myoa.controller;
+package com.yyd.myoa.controller.center;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,15 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.yyd.myoa.controller.BaseController;
 import com.yyd.myoa.exception.ServiceException;
 import com.yyd.myoa.exception.ValidateException;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.query.UserInfoQuery;
 import com.yyd.myoa.service.Page;
-import com.yyd.myoa.service.SysFunService;
 import com.yyd.myoa.service.UserInfoService;
-import com.yyd.myoa.service.tag.SysFunTag;
 import com.yyd.myoa.utils.HttpUtils;
 
 

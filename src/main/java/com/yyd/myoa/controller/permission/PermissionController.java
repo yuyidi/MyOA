@@ -1,4 +1,4 @@
-package com.yyd.myoa.controller;
+package com.yyd.myoa.controller.permission;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yyd.myoa.controller.BaseController;
 import com.yyd.myoa.model.SysFun;
 import com.yyd.myoa.service.SysFunService;
 

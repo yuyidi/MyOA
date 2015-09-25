@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- BEGIN HEADER -->
@@ -8,7 +7,7 @@
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
 			<a href="index.html"> <img
-				src="../../assets/admin/layout/img/logo.png" alt="logo"
+				src="${rc.contextPath}/assets/admin/layout/img/logo.png" alt="logo"
 				class="logo-default" />
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
@@ -136,7 +135,7 @@
 								data-handle-color="#637283">
 								<li><a href="inbox.html?a=view"> <span class="photo">
 
-											<img src="../../assets/admin/layout3/img/avatar2.jpg"
+											<img src="${rc.contextPath}/assets/admin/layout3/img/avatar2.jpg"
 											class="img-circle" alt="">
 
 									</span> <span class="subject"> <span class="from"> Lisa
@@ -146,7 +145,7 @@
 								</a></li>
 								<li><a href="inbox.html?a=view"> <span class="photo">
 
-											<img src="../../assets/admin/layout3/img/avatar3.jpg"
+											<img src="${rc.contextPath}/assets/admin/layout3/img/avatar3.jpg"
 											class="img-circle" alt="">
 
 									</span> <span class="subject"> <span class="from">
@@ -157,7 +156,7 @@
 								</a></li>
 								<li><a href="inbox.html?a=view"> <span class="photo">
 
-											<img src="../../assets/admin/layout3/img/avatar1.jpg"
+											<img src="${rc.contextPath}/assets/admin/layout3/img/avatar1.jpg"
 											class="img-circle" alt="">
 
 									</span> <span class="subject"> <span class="from"> Bob
@@ -167,7 +166,7 @@
 								</a></li>
 								<li><a href="inbox.html?a=view"> <span class="photo">
 
-											<img src="../../assets/admin/layout3/img/avatar2.jpg"
+											<img src="${rc.contextPath}/assets/admin/layout3/img/avatar2.jpg"
 											class="img-circle" alt="">
 
 									</span> <span class="subject"> <span class="from"> Lisa
@@ -177,7 +176,7 @@
 								</a></li>
 								<li><a href="inbox.html?a=view"> <span class="photo">
 
-											<img src="../../assets/admin/layout3/img/avatar3.jpg"
+											<img src="${rc.contextPath}/assets/admin/layout3/img/avatar3.jpg"
 											class="img-circle" alt="">
 
 									</span> <span class="subject"> <span class="from">
@@ -288,8 +287,8 @@
 					class="dropdown-toggle" data-toggle="dropdown"
 					data-hover="dropdown" data-close-others="true"> <img alt=""
 						class="img-circle"
-						src="../../assets/admin/layout/img/avatar3_small.jpg" /> <span
-						class="username username-hide-on-mobile"> Nick </span> <i
+						src="${rc.contextPath}/assets/admin/layout/img/avatar3_small.jpg" />
+						<span class="username username-hide-on-mobile"> Nick </span> <i
 						class="fa fa-angle-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-menu-default">

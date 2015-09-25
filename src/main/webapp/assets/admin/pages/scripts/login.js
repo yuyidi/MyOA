@@ -1,7 +1,5 @@
 var Login = function() {
-
     var handleLogin = function() {
-
         $('.login-form').validate({
         	debug:true,
             errorElement: 'span', //default input error message container
@@ -54,7 +52,7 @@ var Login = function() {
             		 type:form.method,
             		 dataType:'json',
             		 success:function(data){
-            			 window.location.href="index";
+            			 window.location.href=Metronic.context()+data.success;
             		 },error: function(XMLHttpRequest, textStatus, errorThrown) {
             			 $("#login_error").html(XMLHttpRequest.responseJSON.result);
             			 $('.alert-danger', $('.login-form')).show();
