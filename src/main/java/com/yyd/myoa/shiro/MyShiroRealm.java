@@ -20,6 +20,9 @@ public class MyShiroRealm extends AuthorizingRealm {
 	@Autowired
 	private UserInfoService userInfoService;
 
+	/**
+	 * 授权：获取用户角色信息，并绑定到认证对象中，后通过角色获取权限集合(资源：操作)
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String username = (String) principals.fromRealm(getName()).iterator().next();
@@ -38,7 +41,9 @@ public class MyShiroRealm extends AuthorizingRealm {
 		return null;
 	}
 
-	
+	/**
+	 * 认证：
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken userToken = (UsernamePasswordToken) token;
