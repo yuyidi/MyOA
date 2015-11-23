@@ -67,8 +67,9 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
-
+	<!--散列密码的生成规则 [算法/私盐/公盐生成/加密迭代次数]  -->
 	<bean id="hashService" class="org.apache.shiro.crypto.hash.DefaultHashService" />
+	<!-- 散列出的值进行格式化 [给hash的结果添加一些前缀] -->
 	<bean id="hashFormat" class="org.apache.shiro.crypto.hash.format.Shiro1CryptFormat" />
 	<bean id="hashFormatFactory"
 		class="org.apache.shiro.crypto.hash.format.DefaultHashFormatFactory" />
@@ -81,6 +82,8 @@
 	<bean id="passwordMatcher" class="org.apache.shiro.authc.credential.PasswordMatcher">
 		<property name="passwordService" ref="passwordService" />
 	</bean>
+<!-- 	<bean id="passwordMatcher" class="com.yyd.myoa.shiro.credentials.RetryLimitHashedCredentialsMatcher"> -->
+<!-- 	</bean> -->
 
 	<!-- shiro 权限鉴定 -->
 	<bean id="myRealm" class="com.yyd.myoa.shiro.MyShiroRealm">

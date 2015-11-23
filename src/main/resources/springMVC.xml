@@ -38,6 +38,9 @@
 				<ref bean="fastJsonHttpMessageConverter" /><!-- json转换器 -->
 			</list>
 		</property>
+		<property name="webBindingInitializer">
+			<bean class="com.yyd.myoa.plugin.MyWebBindingInitializer" />
+		</property>
 	</bean>
 
 	<bean
@@ -75,7 +78,7 @@
 					class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 					<property name="viewClass"
 						value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
-					<property name="order" value="1"/>	
+					<property name="order" value="1" />
 					<property name="cache" value="true" />
 					<property name="prefix" value="/" />
 					<property name="suffix" value=".ftl" />
@@ -126,20 +129,20 @@
 			</map>
 		</property>
 	</bean>
-	
-	<bean id="global" class="com.yyd.myoa.interceptor.GlobalInterceptor"/>
+
+	<bean id="global" class="com.yyd.myoa.interceptor.GlobalInterceptor" />
 	<bean id="login" class="com.yyd.myoa.interceptor.LoginInterceptor">
-		<property name="userInfoService" ref="userInfoService"/>
+		<property name="userInfoService" ref="userInfoService" />
 	</bean>
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<ref bean="global"/>
+			<ref bean="global" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/login.json"/>
-			<ref bean="login"/>
+			<mvc:mapping path="/login.json" />
+			<ref bean="login" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
