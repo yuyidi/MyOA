@@ -11,6 +11,13 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 
+/**
+ * 
+* @ClassName: com.yyd.myoa.shiro.credentials 
+* @Description: 用户登录缓存超过规定次数后延长禁止登陆时间 
+* @author yuyidi0630@163.com 
+* @date 2015年11月23日 上午11:26:21
+ */
 public class RetryLimitHashedCredentialsMatcher extends
 		HashedCredentialsMatcher {
 	
