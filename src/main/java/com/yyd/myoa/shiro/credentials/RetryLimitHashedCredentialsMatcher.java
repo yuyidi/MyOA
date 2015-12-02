@@ -43,12 +43,13 @@ public class RetryLimitHashedCredentialsMatcher extends
 		if (retryCount.incrementAndGet() > 5) {
 			// if retryCount > 5 throw
 			//输错5的倍数次后，延长禁止用户登陆时间
+			int delay=0;
 			if(retryCount.get()%5==0){
-				int delay = (int) (60*(Math.pow(retryCount.get()/5, 2)));
+				delay = (int) (60*(Math.pow(retryCount.get()/5, 2)));
 				element.setTimeToLive(element.getTimeToLive()+delay);
 				System.out.println("用户:"+username+"登陆错误次数已经"+retryCount.get()+"次,延长禁止登陆时长"+(delay/60)+"分钟");
 			}
-			throw new ExcessiveAttemptsException("账户已锁定：请"
+			throw new ExcessiveAttemptsException("账户已锁定：延长:"+(delay/60)+"分钟,请"
 					+ (formatDuring(element.getExpirationTime()
 							- System.currentTimeMillis())) + "后重新登陆");
 		}

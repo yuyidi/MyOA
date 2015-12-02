@@ -48,7 +48,7 @@ public class UserinfoServiceTest extends BaseServiceTest{
 	@Test
 	public void getUser(){
 		UserInfoQuery query = new UserInfoQuery();
-	    Page<UserInfo> userinfo = userInfoService.getUserinfoList(query);
+	    Page<UserInfo> userinfo = userInfoService.getUserinfos(query);
 	    createJSONResult(userinfo);
 	}
 	@Test

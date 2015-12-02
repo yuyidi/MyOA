@@ -1,11 +1,22 @@
 package com.yyd.myoa.exception;
 
+/**
+ * 
+* @ClassName: com.yyd.myoa.exception 
+* @Description: 业务异常 
+* @author yuyidi0630@163.com 
+* @date 2015年11月25日 下午6:54:44
+ */
 public class ServiceException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
+    //-----------------------------用户异常开始---------------------
+    /**注册异常*/
+    public static final String USER_REGISTER_ERROR="1001";
+    /**登录异常*/
+    public static final String USER_LOGIN_ERROR="1002";
     
-    public static final String USER_REGISTER_ERROR="002";
-    public static final String USER_LOGIN_ERROR="003";
+    //-----------------------------用户异常结束---------------------
     
     private String type;
     

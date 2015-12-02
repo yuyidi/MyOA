@@ -49,7 +49,7 @@ public class UserInfoService extends BaseService {
 		return password;
 	}
 
-	public Page<UserInfo> getUserinfoList(UserInfoQuery query) {
+	public Page<UserInfo> getUserinfos(UserInfoQuery query) {
 			PageList<UserInfo> pageList = (PageList<UserInfo>) userInfoMapper
 					.selectByQuery(query, createPageBounds(query));
 			Page<UserInfo> page = new Page<UserInfo>(pageList);

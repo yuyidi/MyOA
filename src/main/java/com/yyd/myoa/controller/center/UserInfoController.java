@@ -35,14 +35,14 @@ public class UserInfoController extends BaseController {
 	private UserInfoService userInfoService;
 	
 	@RequestMapping(value="/table")
-	public void user(ModelMap model,@RequestParam(value="page",required=false) Integer page) throws ValidateException{
+	public void user(ModelMap model,@RequestParam(value="page",required=false) Integer page){
 		UserInfoQuery query = new UserInfoQuery();
 		query.setLimit(5);
 		if(page==null){
 			 throw new ValidateException("页码参数有误");
 		}
 		query.setPage(page);
-	    Page<UserInfo> userInfos=  userInfoService.getUserinfoList(query);
+	    Page<UserInfo> userInfos=  userInfoService.getUserinfos(query);
 	    creatJSONResult(model, userInfos);
 	}
 	
@@ -65,7 +65,7 @@ public class UserInfoController extends BaseController {
 	* @throws
 	 */
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public String register(UserInfo userInfo,ModelMap model,HttpServletRequest request) throws ServiceException{
+	public String register(UserInfo userInfo,ModelMap model,HttpServletRequest request){
 		String result = userInfoService.registerUser(userInfo,HttpUtils.getBasePath(request));
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("message", result);

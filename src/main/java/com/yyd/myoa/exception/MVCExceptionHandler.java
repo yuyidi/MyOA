@@ -1,11 +1,10 @@
 package com.yyd.myoa.exception;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yyd.myoa.constant.SystemConstant;
-import com.yyd.myoa.exception.ValidateException;
 
 
 /**
@@ -26,45 +24,39 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
             Object handler, Exception ex) {
         ModelAndView mv = new ModelAndView();
-        // 此处可以根据不用的异常返回不同的视图
         String message = "未知错误";
-        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        String code = "0000";
+        response.setStatus(HttpServletResponse.SC_OK);
         try {
-          //验证错误异常(参数异常)
             if(ex instanceof ValidateException){
+            	//验证错误异常(参数异常)
             	ValidateException ve = (ValidateException) ex;
                 message = ve.showMsg();
-                response.setStatus(HttpServletResponse.SC_OK);
-            }
-            //业务层异常处理
-            if(ex instanceof ServiceException){
+            }else if(ex instanceof ServiceException){
+                //业务层异常处理
                 ServiceException se = (ServiceException) ex;
                 message = se.showMsg();
-                response.setStatus(HttpServletResponse.SC_OK);
-            }
-            //权限，未知账户异常
-            if(ex instanceof UnknownAccountException){
+                code =se.getType();
+            }else if(ex instanceof UnknownAccountException){
+            	//未知账户异常
                 message = ex.getMessage();
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            }
-            //权限，密码错误异常
-            if(ex instanceof IncorrectCredentialsException){
+            }else if(ex instanceof IncorrectCredentialsException){
+            	 //密码错误异常
                 message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            }
-            //权限，账户已锁定异常
-            if(ex instanceof LockedAccountException){
+            }else if(ex instanceof LockedAccountException){
+            	//账户已锁定异常
                 message = SystemConstant.LOCKED_ACCOUNT_EXCEPTION;
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }else if(ex instanceof ExcessiveAttemptsException){
+            	//登陆异常次数超过规定次数
+            	ExcessiveAttemptsException exAE = (ExcessiveAttemptsException) ex;
+            	message = exAE.getMessage();
+            }else if(ex instanceof AuthenticationException){
+            	//统一认证异常
+                message = SystemConstant.AUTHENTICATION_EXCEPTION;
             }
-            //授权异常，一般都是登录成功后就会被授权，所以此授权异常不起作用
-//            if(ex instanceof AuthenticationException){
-//                message = SystemConstant.AUTHENTICATION_EXCEPTION;
-//                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//            }
-        }
-        finally {
+        }finally {
             mv.addObject("result", message);
+            mv.addObject("code", code);
         }
         return  mv;
     }
