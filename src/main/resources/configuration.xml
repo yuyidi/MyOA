@@ -4,7 +4,7 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 <configuration>
 	<plugins>
-		<plugin interceptor="com.yyd.myoa.interceptor.PerformanceInterceptor"/>
+<!-- 		<plugin interceptor="com.yyd.myoa.interceptor.PerformanceInterceptor"/> -->
 		<plugin
 			interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
 			<property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect" />

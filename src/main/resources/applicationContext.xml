@@ -28,7 +28,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:myoa.properties</value>
-				<value>classpath:j2cache/j2cache.properties</value>
+<!-- 				<value>classpath:j2cache/j2cache.properties</value> -->
 			</list>
 		</property>
 	</bean>

@@ -1,13 +1,13 @@
 package com.yyd.myoa.service;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,6 @@ import com.yyd.myoa.model.LoginLog;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.model.UserVerify;
 import com.yyd.myoa.query.UserInfoQuery;
-import com.yyd.myoa.utils.HttpUtils;
 import com.yyd.myoa.utils.Mail;
 import com.yyd.myoa.utils.MyUtils;
 
@@ -40,13 +39,13 @@ public class UserInfoService extends BaseService {
 	/**
 	 * 
 	* @Title: getUserPassword
-	* @Description: 登录，根据查询的用户名查询用户密码
+	* @Description: 登录，根据查询的用户名查询用户密码 与盐 TODO
 	* @return String
 	* @throws
 	 */
-	public String getUserPassword(String userId) {
-		String password = userInfoMapper.selectPasswordByUserId(userId);
-		return password;
+	public Map<String, String> getUserPassword(String userId) {
+		Map<String, String> result = userInfoMapper.selectPasswordByUserId(userId);
+		return result;
 	}
 
 	public Page<UserInfo> getUserinfos(UserInfoQuery query) {
@@ -67,6 +66,9 @@ public class UserInfoService extends BaseService {
 		userInfo.setPassword(passwordService.encryptPassword(userInfo
 				.getPassword()));
 		String num = String.valueOf(MyUtils.getIntRandom());
+		//随机数产生私盐
+		String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
+		userInfo.setSalt(salt);
 		String random = passwordService.encryptPassword(num);//使用SHA-512算法将随机数加密
 		String userActiCode = passwordService.encryptPassword(userInfo.getUserName());//使用SHA-512算法将用户真实姓名加密
 		userInfo.setActiCode(random);
@@ -83,7 +85,8 @@ public class UserInfoService extends BaseService {
 				userVerifyMapper.insert(uv);
 				String content ="<html><head><meta http-equiv="+"Content-Type"+" content="+"text/html; charset=utf-8"+"></head><body><h2>请点击下面链接完成注册</h2><a href="+contextPath+"/user-info/verify?userActiCode="+encodeUserActiCode+"&random="+encodeRandom+">"+  
 				        contextPath+"/user-info/verify?userActiCode="+encodeUserActiCode+"&random="+encodeRandom+"</a><br></body></html>";
-				mail.sendMail(SystemConstant.SUBJECT_TITLE, content, userInfo.getEmail());
+				System.out.println(content);
+//				mail.sendMail(SystemConstant.SUBJECT_TITLE, content, userInfo.getEmail());
 				result ="邮件已发送到你的邮箱，请确认完成注册";
 			}
 		} catch (Exception e) {

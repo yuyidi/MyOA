@@ -2,7 +2,7 @@ package com.yuyidi.myoa.justest;
 import java.util.concurrent.Exchanger;
 
 
-public class Test {
+public class ExchangerArray {
     public static void main(String[] args) {
         final Exchanger<String> exchange = new Exchanger<String>();
         final String[] carA = new String[] { "zhangsan", "lisi", "yupan" };
