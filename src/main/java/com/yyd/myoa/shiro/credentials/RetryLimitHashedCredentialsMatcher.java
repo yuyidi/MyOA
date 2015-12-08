@@ -10,6 +10,8 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -20,7 +22,7 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
  */
 public class RetryLimitHashedCredentialsMatcher extends
 		HashedCredentialsMatcher {
-	
+	private Logger log = LoggerFactory.getLogger(RetryLimitHashedCredentialsMatcher.class);
 	private Ehcache passwordRetryCache;
 	public RetryLimitHashedCredentialsMatcher() {
 		CacheManager cacheManager = CacheManager.newInstance(CacheManager.class
@@ -47,8 +49,8 @@ public class RetryLimitHashedCredentialsMatcher extends
 			if(retryCount.get()%5==0){
 				delay = (int) (60*(Math.pow(retryCount.get()/5, 2)));
 				element.setTimeToLive(element.getTimeToLive()+delay);
-				System.out.println("用户:"+username+"登陆错误次数已经"+retryCount.get()+"次,延长禁止登陆时长"+(delay/60)+"分钟");
 			}
+			log.info("用户:"+username+"登陆错误次数已经"+retryCount.get()+"次,延长禁止登陆时长"+(delay/60)+"分钟");
 			throw new ExcessiveAttemptsException("账户已锁定：延长:"+(delay/60)+"分钟,请"
 					+ (formatDuring(element.getExpirationTime()
 							- System.currentTimeMillis())) + "后重新登陆");
@@ -56,7 +58,7 @@ public class RetryLimitHashedCredentialsMatcher extends
 		boolean matches = super.doCredentialsMatch(token, info);
 		if (matches) {
 			// clear retry count
-			System.out.println("登陆验证通过");
+			log.info("登陆验证通过");
 			passwordRetryCache.remove(username);
 		}
 		return matches;

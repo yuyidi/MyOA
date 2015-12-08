@@ -5,14 +5,12 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.yyd.myoa.constant.SystemConstant;
 import com.yyd.myoa.dao.LoginLogMapper;
 import com.yyd.myoa.dao.UserInfoMapper;
 import com.yyd.myoa.dao.UserVerifyMapper;
@@ -21,6 +19,7 @@ import com.yyd.myoa.model.LoginLog;
 import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.model.UserVerify;
 import com.yyd.myoa.query.UserInfoQuery;
+import com.yyd.myoa.shiro.credentials.MyPasswordService;
 import com.yyd.myoa.utils.Mail;
 import com.yyd.myoa.utils.MyUtils;
 
@@ -29,7 +28,7 @@ public class UserInfoService extends BaseService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 	@Resource(name = "passwordService")
-	private PasswordService passwordService;
+	private MyPasswordService passwordService;
 	@Autowired
 	private UserVerifyMapper userVerifyMapper;
 	@Autowired
@@ -63,12 +62,12 @@ public class UserInfoService extends BaseService {
 	* @throws
 	 */
 	public String registerUser(UserInfo userInfo,String contextPath) throws ServiceException {
-		userInfo.setPassword(passwordService.encryptPassword(userInfo
-				.getPassword()));
 		String num = String.valueOf(MyUtils.getIntRandom());
 		//随机数产生私盐
 		String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
 		userInfo.setSalt(salt);
+		userInfo.setPassword(passwordService.encryptPassword(userInfo
+				.getPassword(),salt));
 		String random = passwordService.encryptPassword(num);//使用SHA-512算法将随机数加密
 		String userActiCode = passwordService.encryptPassword(userInfo.getUserName());//使用SHA-512算法将用户真实姓名加密
 		userInfo.setActiCode(random);

@@ -26,32 +26,38 @@ public class MVCExceptionHandler implements HandlerExceptionResolver {
         ModelAndView mv = new ModelAndView();
         String message = "未知错误";
         String code = "0000";
-        response.setStatus(HttpServletResponse.SC_OK);
         try {
             if(ex instanceof ValidateException){
             	//验证错误异常(参数异常)
+            	response.setStatus(HttpServletResponse.SC_OK);
             	ValidateException ve = (ValidateException) ex;
                 message = ve.showMsg();
             }else if(ex instanceof ServiceException){
                 //业务层异常处理
+                response.setStatus(HttpServletResponse.SC_OK);
                 ServiceException se = (ServiceException) ex;
                 message = se.showMsg();
                 code =se.getType();
             }else if(ex instanceof UnknownAccountException){
             	//未知账户异常
+            	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 message = ex.getMessage();
             }else if(ex instanceof IncorrectCredentialsException){
             	 //密码错误异常
+            	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 message = SystemConstant.UNKNOWN_ACCOUNT_EXCEPTION;
             }else if(ex instanceof LockedAccountException){
             	//账户已锁定异常
+            	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 message = SystemConstant.LOCKED_ACCOUNT_EXCEPTION;
             }else if(ex instanceof ExcessiveAttemptsException){
             	//登陆异常次数超过规定次数
+            	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             	ExcessiveAttemptsException exAE = (ExcessiveAttemptsException) ex;
             	message = exAE.getMessage();
             }else if(ex instanceof AuthenticationException){
             	//统一认证异常
+            	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 message = SystemConstant.AUTHENTICATION_EXCEPTION;
             }
         }finally {

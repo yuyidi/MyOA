@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
 
 public abstract class BaseController {
-    public  Logger log = LoggerFactory.getLogger(getClass().getName());
+    protected  Logger log = LoggerFactory.getLogger(getClass().getName());
     protected void creatJSONResult(ModelMap model, Object obj) {
         model.addAttribute("result", obj);
     }
