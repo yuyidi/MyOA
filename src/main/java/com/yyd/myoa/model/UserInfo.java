@@ -8,6 +8,8 @@ public class UserInfo implements Serializable{
     private String userName;
 
     private String password;
+    
+    private String salt;
 
     private String email;
 
@@ -34,7 +36,7 @@ public class UserInfo implements Serializable{
     public UserInfo() {
 	}
 
-    public UserInfo(String userId, String userName, String password,
+    public UserInfo(String userId, String userName, String password,String salt,
 			String email, Integer departId, Integer gender, Integer roleId,
 			Integer userState, Integer ifDeleteUser, String userPricter,
 			String actiCode, String actiCodeName) {
@@ -42,6 +44,7 @@ public class UserInfo implements Serializable{
 		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
+		this.salt= salt;
 		this.email = email;
 		this.departId = departId;
 		this.gender = gender;
@@ -52,7 +55,6 @@ public class UserInfo implements Serializable{
 		this.actiCode = actiCode;
 		this.actiCodeName = actiCodeName;
 	}
-
 
 
 	public void setUserId(String userId) {
@@ -75,6 +77,14 @@ public class UserInfo implements Serializable{
         this.password = password == null ? null : password.trim();
     }
 
+    public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+    
     public String getEmail() {
         return email;
     }

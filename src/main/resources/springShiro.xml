@@ -35,7 +35,7 @@
 		<property name="filters">
 			<util:map>
 				<entry key="authc" value-ref="authcFormAuthenticationFilter" />
-				<entry key="logout" value-ref="logout"/>
+				<entry key="logout" value-ref="logout" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -67,23 +67,35 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
-	<!--散列密码的生成规则 [算法/私盐/公盐生成/加密迭代次数]  -->
-	<bean id="hashService" class="org.apache.shiro.crypto.hash.DefaultHashService" />
+	<!--散列密码的生成规则 [算法/私盐/公盐生成/加密迭代次数] -->
+	<bean id="hashService" class="com.yyd.myoa.shiro.credentials.MyHashService"/>
 	<!-- 散列出的值进行格式化 [给hash的结果添加一些前缀] -->
-	<bean id="hashFormat" class="org.apache.shiro.crypto.hash.format.Shiro1CryptFormat" />
-	<bean id="hashFormatFactory"
-		class="org.apache.shiro.crypto.hash.format.DefaultHashFormatFactory" />
-	<bean id="passwordService"
-		class="org.apache.shiro.authc.credential.DefaultPasswordService">
-		<property name="hashService" ref="hashService" />
-		<property name="hashFormat" ref="hashFormat" />
-		<property name="hashFormatFactory" ref="hashFormatFactory" />
-	</bean>
-	<bean id="passwordMatcher" class="org.apache.shiro.authc.credential.PasswordMatcher">
-		<property name="passwordService" ref="passwordService" />
-	</bean>
-<!-- 	<bean id="passwordMatcher" class="com.yyd.myoa.shiro.credentials.RetryLimitHashedCredentialsMatcher"> -->
+<!-- 	<bean id="hashFormat" class="org.apache.shiro.crypto.hash.format.Shiro1CryptFormat" /> -->
+<!-- 	<bean id="hashFormatFactory" -->
+<!-- 		class="org.apache.shiro.crypto.hash.format.DefaultHashFormatFactory" /> -->
+<!-- 	<bean id="passwordService" -->
+<!-- 		class="org.apache.shiro.authc.credential.DefaultPasswordService"> -->
+<!-- 		<property name="hashService" ref="hashService" /> -->
+<!-- 		<property name="hashFormat" ref="hashFormat" /> -->
+<!-- 		<property name="hashFormatFactory" ref="hashFormatFactory" /> -->
 <!-- 	</bean> -->
+	<bean id="passwordService" class="com.yyd.myoa.shiro.credentials.MyPasswordService">
+		<property name="hashService" ref="hashService" />
+		<property name="algorithmName" value="md5"/>
+		<property name="hashIterations" value="2"/>
+	</bean>
+	<!-- PasswordMatcher 使用默认方式进行解密，将用户登录明文密码再次加密 ,salt保存在散列值中；没有实现如密码重试次数限制 -->
+	<!-- <bean id="passwordMatcher" class="org.apache.shiro.authc.credential.PasswordMatcher"> -->
+	<!-- <property name="passwordService" ref="passwordService" /> -->
+	<!-- </bean> -->
+	<!-- 自定义解密，密码验证提供自己的盐 -->
+	<bean id="passwordMatcher"
+		class="com.yyd.myoa.shiro.credentials.RetryLimitHashedCredentialsMatcher">
+		<!-- <property name="passwordService" ref="passwordService" /> -->
+		<property name="hashAlgorithmName" value="md5" />
+		<property name="hashIterations" value="2" />
+		<property name="storedCredentialsHexEncoded" value="true" />
+	</bean>
 
 	<!-- shiro 权限鉴定 -->
 	<bean id="myRealm" class="com.yyd.myoa.shiro.MyShiroRealm">
