@@ -18,7 +18,7 @@ public class UserInfo implements Serializable{
     private Integer gender;
 
     private Integer roleId;
-
+    //TODO 使用枚举
     private Integer userState;
 
     private Integer ifDeleteUser;

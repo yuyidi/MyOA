@@ -5,6 +5,7 @@
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="depart_id" jdbcType="INTEGER" property="departId" />
     <result column="gender" jdbcType="INTEGER" property="gender" />
@@ -16,7 +17,7 @@
     <result column="acti_code_name" jdbcType="VARCHAR" property="actiCodeName" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, password, email, depart_id, gender, role_id, user_state, if_delete_user, 
+    user_id, user_name, password,salt, email, depart_id, gender, role_id, user_state, if_delete_user, 
     user_pricter, acti_code, acti_code_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -30,12 +31,12 @@
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.yyd.myoa.model.UserInfo">
-    insert into user_info (user_id, user_name, password, 
+    insert into user_info (user_id, user_name, password,salt, 
       email, depart_id, gender, 
       role_id, user_state, if_delete_user, 
       user_pricter, acti_code, 
       acti_code_name)
-    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{departId,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, 
       #{roleId,jdbcType=INTEGER}, #{userState,jdbcType=INTEGER}, #{ifDeleteUser,jdbcType=INTEGER}, 
       #{userPricter,jdbcType=VARCHAR}, #{actiCode,jdbcType=VARCHAR}, 
@@ -52,6 +53,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="salt != null">
+        salt,
       </if>
       <if test="email != null">
         email,
@@ -91,6 +95,9 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
@@ -129,6 +136,9 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -163,6 +173,7 @@
     update user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       depart_id = #{departId,jdbcType=INTEGER},
       gender = #{gender,jdbcType=INTEGER},
@@ -177,8 +188,12 @@
   <select id="selectByQuery" resultMap="BaseResultMap">
   		select <include refid="Base_Column_List"/> from user_info
   </select>
-  <select id="selectPasswordByUserId" resultType="String" >
-  		select password from user_info where user_id = #{userId,jdbcType=VARCHAR} and user_state <![CDATA[<>]]> 1
+  <select id="selectUserInfoByUserId" resultMap="BaseResultMap" >
+  		select <include refid="Base_Column_List"/> from user_info where user_id = #{userId,jdbcType=VARCHAR} 
+<!--   		and user_state <![CDATA[<>]]> 1 -->
+  </select>
+  <select id="selectUserInfoByUserEmail" resultMap="BaseResultMap" >
+  		select <include refid="Base_Column_List"/> from user_info where email = #{email,jdbcType=VARCHAR} 
   </select>
   <update id="updateUserState" >
   	update user_info set user_state = #{userState,jdbcType=INTEGER} where user_id = #{userId,jdbcType=VARCHAR}

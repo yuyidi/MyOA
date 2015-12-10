@@ -20,19 +20,10 @@ public class MyPasswordService implements HashingPasswordService {
 	private String algorithmName = "SHA-256";
 	private int hashIterations = 1;
 	private boolean generatePublicSalt = false;
-
-	public MyPasswordService() {
-		DefaultHashService hashService = new DefaultHashService();
-		hashService.setHashAlgorithmName(getAlgorithmName());
-		hashService.setHashIterations(getHashIterations());
-		hashService.setGeneratePublicSalt(isGeneratePublicSalt()); 
-		this.hashService = hashService;
-	}
-
+	
 	/**
 	 * 生成密文密码
 	 */
-	@Override
 	public String encryptPassword(Object plaintextPassword)
 			throws IllegalArgumentException {
 		Hash hash = hashPassword(plaintextPassword);

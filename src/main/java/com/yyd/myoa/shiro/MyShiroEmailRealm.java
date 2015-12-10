@@ -21,7 +21,7 @@ import com.yyd.myoa.model.UserInfo;
 import com.yyd.myoa.service.UserInfoService;
 
 
-public class MyShiroRealm extends AuthorizingRealm {
+public class MyShiroEmailRealm extends AuthorizingRealm {
 	@Autowired
 	private UserInfoService userInfoService;
 
@@ -53,15 +53,14 @@ public class MyShiroRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-		String userId = userToken.getUsername();
-		UserInfo userInfo = userInfoService.getUserInfo(userId);
+		String emial = userToken.getUsername();
+		UserInfo userInfo = userInfoService.getUserInfoByEmail(emial);
 		if(userInfo == null)
-			throw new UnknownAccountException("没有为 [" + userId + "] 找到用户信息");
-		//TODO 被屏蔽状态用户抛出账户锁定异常  后期使用枚举
-		if(userInfo.getUserState().equals(1)){
+			throw new UnknownAccountException("没有为 [" + emial + "] 找到用户信息");
+		if(userInfo.getUserState().equals(1))
 			throw new LockedAccountException();
-		}
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userInfo.getUserId(), userInfo.getPassword().toCharArray(), getName());
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userInfo.getEmail(), userInfo.getPassword().toCharArray(), getName());
+		//此处设置盐是为了提供用户凭证认证
 		info.setCredentialsSalt(ByteSource.Util.bytes(userInfo.getSalt()));
 		return info;
 	}

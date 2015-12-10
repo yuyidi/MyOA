@@ -42,8 +42,13 @@ public class UserInfoService extends BaseService {
 	* @return String
 	* @throws
 	 */
-	public Map<String, String> getUserPassword(String userId) {
-		Map<String, String> result = userInfoMapper.selectPasswordByUserId(userId);
+	public UserInfo getUserInfo(String userId) {
+		UserInfo result = userInfoMapper.selectUserInfoByUserId(userId);
+		return result;
+	}
+	
+	public UserInfo getUserInfoByEmail(String email) {
+		UserInfo result = userInfoMapper.selectUserInfoByUserEmail(email);
 		return result;
 	}
 
@@ -125,7 +130,7 @@ public class UserInfoService extends BaseService {
 	* @return void
 	* @throws
 	 */
-	public void loginLog(LoginLog log){
+	public void loginLog(LoginLog log)throws ServiceException{
 		loginLogMapper.insert(log);
 	}
 	
