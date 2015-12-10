@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yyd.myoa.constant.SystemConstant;
 import com.yyd.myoa.controller.BaseController;
 import com.yyd.myoa.model.MeetingInfo;
 import com.yyd.myoa.service.SysFunService;
@@ -40,7 +41,6 @@ public class SystemController extends BaseController {
         token.setRememberMe(true);
         subject.login(token);
         request.getSession().setAttribute("sysfun", sysFunSerice.select());
-        subject.getPrincipal();
         model.addAttribute("success", "/index");
     }
 

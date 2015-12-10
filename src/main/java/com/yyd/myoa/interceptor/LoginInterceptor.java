@@ -24,7 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-    	userInfoService.loginLog(new LoginLog(request.getParameter("userId"),new Date(),1,HttpUtils.getIp(request),"登录"));
+    	userInfoService.loginLog(new LoginLog(request.getParameter("userId"),new Date(),1,HttpUtils.getIp(request),"登录成功"));
     }
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object)

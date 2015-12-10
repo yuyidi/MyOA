@@ -60,7 +60,13 @@
 
 	<!-- shiro 权限根对象 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="myRealm" />
+<!-- 		<property name="realm" ref="myRealm" /> -->
+		<property name="realms">
+			<list>
+				<ref bean="myRealm"/>
+				<ref bean="myRealmEmail"/>
+			</list>
+		</property>
 		<!-- 使用下面配置的缓存管理器 -->
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
@@ -99,6 +105,9 @@
 
 	<!-- shiro 权限鉴定 -->
 	<bean id="myRealm" class="com.yyd.myoa.shiro.MyShiroRealm">
-		<property name="credentialsMatcher" ref="passwordMatcher"></property>
+		<property name="credentialsMatcher" ref="passwordMatcher"/>
+	</bean>
+	<bean id="myRealmEmail" class="com.yyd.myoa.shiro.MyShiroEmailRealm">
+		<property name="credentialsMatcher" ref="passwordMatcher"/>
 	</bean>
 </beans>		
