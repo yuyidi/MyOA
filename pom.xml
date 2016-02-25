@@ -478,9 +478,9 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<server>tomcatserver</server>
-					<url>http://127.0.0.1:8090/manager/text</url>
-					<update>true</update>
+					<server>tomcatServer</server>
+					<url>http://127.0.0.1:8080/manager/text</url>
+					<path>/myoa</path>
 					<charset>utf-8</charset>
 				</configuration>
 			</plugin>
